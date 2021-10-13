@@ -1,8 +1,0 @@
-# Example recipe from: https://singularity.hpcng.org/user-docs/3.7/running_services.html
-
-Bootstrap: docker
-From: nginx:1.20
-Includecmd: no
-
-%startscript
-   nginx
