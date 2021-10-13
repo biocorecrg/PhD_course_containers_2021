@@ -282,7 +282,7 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 </h4>
 </center>
 <ol style="list-style-type: decimal">
-<li>Copy the 2 fastq files from the <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata">Github repository</a> and place them in mounted directory.</li>
+<li>Copy the 2 fastq files from the <a href="https://github.com/biocorecrg/PhD_course_containers_2021/tree/main/testdata">Github repository</a> and place them in mounted directory.</li>
 <li>Run fastqc interactively (inside container): <code>fastqc /scratch/*.gz</code></li>
 <li>Run fastqc outside the container</li>
 </ol>
@@ -293,8 +293,8 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 </h5>
 <p></summary></p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb82-1"><a href="volumes.html#cb82-1"></a><span class="co"># Download test fastq files (manually or using the following commands) and place them in &quot;datatest&quot;:</span></span>
-<span id="cb82-2"><a href="volumes.html#cb82-2"></a><span class="fu">wget</span> -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_H3K4me1_s_chr19.fastq.gz?raw=true <span class="op">&gt;</span> datatest/B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb82-3"><a href="volumes.html#cb82-3"></a><span class="fu">wget</span> -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true <span class="op">&gt;</span> datatest/B7_input_s_chr19.fastq.gz</span>
+<span id="cb82-2"><a href="volumes.html#cb82-2"></a><span class="fu">wget</span> -O - https://github.com/biocorecrg/PhD_course_containers_2021/blob/main/testdata/B7_H3K4me1_s_chr19.fastq.gz?raw=true <span class="op">&gt;</span> datatest/B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb82-3"><a href="volumes.html#cb82-3"></a><span class="fu">wget</span> -O - https://github.com/biocorecrg/PhD_course_containers_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true <span class="op">&gt;</span> datatest/B7_input_s_chr19.fastq.gz</span>
 <span id="cb82-4"><a href="volumes.html#cb82-4"></a></span>
 <span id="cb82-5"><a href="volumes.html#cb82-5"></a><span class="co"># Mount volumes and start a detached container</span></span>
 <span id="cb82-6"><a href="volumes.html#cb82-6"></a><span class="ex">docker</span> run --detach -ti --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container_test biocontainers/fastqc:v0.11.9_cv7</span>
@@ -321,7 +321,7 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 </h4>
 </center>
 <ol style="list-style-type: decimal">
-<li>Copy the 2 FASTA files from the <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata/blast">Github repository</a> and place them in mounted directory.</li>
+<li>Copy the 2 FASTA files from the <a href="https://github.com/biocorecrg/PhD_course_containers_2021/tree/main/testdata/blast">Github repository</a> and place them in mounted directory.</li>
 <li>Run <code>blastp</code> inside the container against each other: <code>blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta</code></li>
 <li>Run <code>blastp</code> outside the container and get the result. Do with exec and do all at once with run</li>
 </ol>
