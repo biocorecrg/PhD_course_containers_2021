@@ -195,7 +195,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.11" data-path="publish-images.html"><a href="publish-images.html"><i class="fa fa-check"></i><b>3.11</b> Publish images</a><ul>
 <li class="chapter" data-level="3.11.1" data-path="publish-images.html"><a href="publish-images.html#push-an-image"><i class="fa fa-check"></i><b>3.11.1</b> Push an image</a></li>
-<li class="chapter" data-level="3.11.2" data-path="publish-images.html"><a href="publish-images.html#automatic-builds"><i class="fa fa-check"></i><b>3.11.2</b> Automatic builds</a></li>
 </ul></li>
 <li class="chapter" data-level="3.12" data-path="exercise-3---docker-volumes-and-ports.html"><a href="exercise-3---docker-volumes-and-ports.html"><i class="fa fa-check"></i><b>3.12</b> Exercise 3 - Docker volumes and ports</a></li>
 </ul></li>
@@ -305,20 +304,9 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store</c
 As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling.
 </div>
 
-</div>
-<div id="automatic-builds" class="section level3">
-<h3><span class="header-section-number">3.11.2</span> Automatic builds</h3>
-<ul>
-<li><p>Create a Github repository</p></li>
-<li><p>Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with <strong>COPY</strong>) you will need to upload them and place them in a way compatible with the context you choose.</p></li>
-<li><p>Configure an automated build from Docker Hub</p></li>
-</ul>
-<p>First you may need to grant permission to Github from your Docker Hub account. More information at: <a href="https://docs.docker.com/docker-hub/builds/link-source/" class="uri">https://docs.docker.com/docker-hub/builds/link-source/</a></p>
-<p><img src="docs/images/dockerhub-automated-build.png" width="60%" /></p>
-<p><img src="docs/images/dockerhub-automated-build-details.png" width="60%" /></p>
 
 <div class="rdmnote">
-If you cannot trigger the automatic build, it may be because Docker Hub refers by default to <strong>master</strong> branch of Github repositories. Since late 2020, default Branch is <strong>main</strong>, so you might need to explictly put that name there. Some context: <a href="https://www.infoq.com/news/2020/10/github-main-branch/" class="uri">https://www.infoq.com/news/2020/10/github-main-branch/</a>
+Docker Hub PRO users have the option to have <a href="https://docs.docker.com/docker-hub/builds/">automatic builds</a> generated when there is a change in an associated Git repository (Github). Alternatively, you can <a href="https://github.com/marketplace/actions/build-and-push-docker-images">use Github Actions</a>.
 </div>
 
 </div>

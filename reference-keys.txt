@@ -55,7 +55,6 @@ fastqc-web-application
 shiny-application
 publish-images
 push-an-image
-automatic-builds
 exercise-3---docker-volumes-and-ports
 singularity
 introduction-to-singularity
