@@ -1,7 +1,7 @@
-title: "Containers and Nextflow 2021"
-author: "Sarah Bonnin"
+title: "PhD Course Containers 2021"
+author: "Toni Hermoso Pulido"
 date: "`r Sys.Date()`"
-book_filename: "courses_at_crg_2021"
+book_filename: "phd_course_containers_2021"
 language:
   ui:
     chapter_name: "Part "
@@ -9,9 +9,7 @@ delete_merged_file: true
 rmd_files: ["index.Rmd",
           "containers_intro.Rmd",
           "docker.Rmd",
-          "singularity.Rmd",
-          "nextflow1.Rmd",
-          "nextflow2.Rmd"]
+          "singularity.Rmd"]
 output:
   bookdown::gitbook:
     theme: cosmo

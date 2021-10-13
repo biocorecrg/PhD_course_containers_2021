@@ -1,5 +1,5 @@
 theme: jekyll-theme-dinky
-title: Containers and Nextflow 2021
+title: PhD Course: Containers 2021
 markdown: kramdown
 kramdown:
   parse_block_html: true
