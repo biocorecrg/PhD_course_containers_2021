@@ -1,4 +1,4 @@
-# Example recipe from: https://sylabs.io/guides/3.7/user-guide/running_services.html
+# Example recipe from: https://singularity.hpcng.org/user-docs/3.7/running_services.html
 
 Bootstrap: docker
 From: nginx:1.20

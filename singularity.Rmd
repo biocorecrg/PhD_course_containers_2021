@@ -46,6 +46,15 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 * For some features you need root account (or sudo)
 
 
+## Warning
+
+There may be some confusion since there are two projects which the share the same name:
+
+* [HPCng Singularity](https://singularity.hpcng.org/)
+* [Sylabs Singularity](https://sylabs.io/singularity/)
+
+They "forked" not long ago. So far they share most of the codebase, but eventually this may different and software could have different functionality.
+
 ## Build process
 
 <!-- New image needs to be created based on this -->
@@ -85,11 +94,11 @@ There are different ways to generate Singularity image files. The most common wa
 Galaxy project provides all Bioinformatics software from Biocontainers initiative as Singularity prebuilt images. If download and conversion time of images is an issue for you, this is likely the best option if working in the biomedical field.
 ```
 
-##### Sylabs registry
+##### Singularity catalog
 
-Not as popular so far, but it provides fast download of images.
+Not as popular so far, but it provides a lot of recipes (to be discussed below)
 
-* [https://cloud.sylabs.io/library](https://cloud.sylabs.io/library)
+* [https://singularityhub.github.io/singularity-catalog/](https://singularityhub.github.io/singularity-catalog/)
 
 
 #### Docker Daemon
@@ -195,61 +204,11 @@ Version 0.1.0
 ```
 
 ```{block2, type='rmdtip'}
-The available deboostrap recipes depend on the version you have installed in the system. Check at: ```/usr/share/debootstrap/scripts/``` for more details. For Debian, instead of Ubuntu, you can replace mirrorURL with https://ftp.debian.org/debian/ More details at: https://sylabs.io/guides/3.7/user-guide/appendix.html#build-debootstrap
+The available deboostrap recipes depend on the version you have installed in the system. Check at: ```/usr/share/debootstrap/scripts/``` for more details. For Debian, instead of Ubuntu, you can replace mirrorURL with https://ftp.debian.org/debian/ More details at: https://singularity.hpcng.org/user-docs/3.7/appendix.html#build-debootstrap
 ```
 
 ```{block2, type='rmdnote'}
-It's possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: https://sylabs.io/guides/3.7/user-guide/signNverify.html
-```
-
-### Remote building
-
-This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources or if you don't have administrator privileges.
-
-* We need to create a [https://cloud.sylabs.io/](Sylabs Cloud) account first.
-
-```{bash, eval=FALSE, echo=TRUE}
-    singularity remote login
-```
-
-* In order to use it our username and passwords we generate a token at https://cloud.sylabs.io/auth/tokens and copy its contents to a file (e.g., ``singularity.token``). Then we use in the command-line below:
-
-```{bash, eval=FALSE, echo=TRUE}
-    singularity remote login --tokenfile singularity.token
-```
-
-<details>
-<summary>
-<h5>*Output*</h5>
-</summary>
-    (base) [ec2-user@ip-172-31-47-200 ~]$ singularity remote login --tokenfile singularity.token
-    INFO:    Access Token Verified!
-    INFO:    Token stored in /home/ec2-user/.singularity/remote.yaml
-</details>
-
-```{block2, type='rmdtip'}
-For safety reasons, remove the token from Cloud Sylabs interface after the course. Follow the same philosophy for similar circumstances. Keep an only token for a specific environment or action.
-```
-
-* Once we are authenticated with our access token, we can **build an image**:
-
-```{bash, eval=FALSE, echo=TRUE}
-    singularity build --remote focal.sif docker://ubuntu:focal
-```
-
-* Since we are already authenticated, we can take advantage to push a Singularity image in our account, similarly to what we did with Docker. We use ```-U``` so we do not sign the image.
-
-```{bash, eval=FALSE, echo=TRUE}
-    singularity push -U focal.sif library://toniher/test/focal.sif:latest
-```
-
-```{block2, type='rmdtip'}
-IMPORTANT: Unless it is not defined in advance as private from Cloud Sylabs interface, pushed image will be public and there does not seem an easy way to turn it private.
-As an interesting feature, you can actually sign your images after you pushed them from Cloud Sylabs web interface by using a key associated to your account (which can also be created there).
-```
-
-```{block2, type='rmdnote'}
-More details at [https://sylabs.io/guides/3.7/user-guide/cloud_library.html](https://sylabs.io/guides/3.7/user-guide/cloud_library.html)
+It's possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: https://singularity.hpcng.org/user-docs/3.7/signNverify.html
 ```
 
 ## Run and execution process
@@ -326,7 +285,7 @@ Image is actually downloaded (and if a Docker one, converted) and stored in Sing
 
 Paths of host system mounted in the container
 
-* Default ones, no need to mount them explicitly (for 3.7.x): ```$HOME``` , ```/sys:/sys``` , ```/proc:/proc```, ```/tmp:/tmp```, ```/var/tmp:/var/tmp```, ```/etc/resolv.conf:/etc/resolv.conf```, ```/etc/passwd:/etc/passwd```, and ```$PWD``` [https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html)
+* Default ones, no need to mount them explicitly (for 3.7.x): ```$HOME``` , ```/sys:/sys``` , ```/proc:/proc```, ```/tmp:/tmp```, ```/var/tmp:/var/tmp```, ```/etc/resolv.conf:/etc/resolv.conf```, ```/etc/passwd:/etc/passwd```, and ```$PWD``` [https://singularity.hpcng.org/user-docs/3.7/bind_paths_and_mounts.html](https://singularity.hpcng.org/user-docs/3.7/bind_paths_and_mounts.html)
 
 For others, need to be done explicitly (syntax: host:container)
 
@@ -407,14 +366,14 @@ When exposing ports below 1024 in a LINUX machine, administrator (sudo) privileg
 ```
 
 ```{block2, type='rmdtip'}
-Specially with instances (**but not only**), if you encounter some permission problems you may need to enable write permissions in the image. If you do not want changes to persist in the image, you may want to use the **--writable-tmpfs option**. Changes are stored in an in-memory temporary filesystem which is discarded as soon as the service stops. More details about special storage options with Singularity: https://sylabs.io/guides/3.7/user-guide/persistent_overlays.html
+Specially with instances (**but not only**), if you encounter some permission problems you may need to enable write permissions in the image. If you do not want changes to persist in the image, you may want to use the **--writable-tmpfs option**. Changes are stored in an in-memory temporary filesystem which is discarded as soon as the service stops. More details about special storage options with Singularity: https://singularity.hpcng.org/user-docs/3.7/persistent_overlays.html
 ```
 
 More information:
 
-* [https://sylabs.io/guides/3.7/user-guide/running_services.html](https://sylabs.io/guides/3.7/user-guide/running_services.html)
+* [https://singularity.hpcng.org/user-docs/3.7/running_services.html](https://singularity.hpcng.org/user-docs/3.7/user-guide/running_services.html)
 
-* [https://sylabs.io/guides/3.7/user-guide/networking.html](https://sylabs.io/guides/3.7/user-guide/networking.html)
+* [https://singularity.hpcng.org/user-docs/3.7/networking.html](https://singularity.hpcng.org/user-docs/3.7/networking.html)
 
 ## Troubleshooting
 
@@ -426,7 +385,7 @@ More information:
 
 Singularity permissions are an evolving field. If you don't have access to ```sudo```, it might be worth considering using ``--fakeroot/-f`` parameter.
 
-* More details at [https://sylabs.io/guides/3.7/user-guide/fakeroot.html](https://sylabs.io/guides/3.7/user-guide/fakeroot.html)
+* More details at [https://singularity.hpcng.org/user-docs/3.7/fakeroot.html](https://singularity.hpcng.org/user-docs/3.7/fakeroot.html)
 
 ### Singularity cache directory
 
@@ -518,7 +477,7 @@ singularity exec blast.sif blastdbcmd -dbtype prot -db swissprot -entry O75976
 </summary>
 
 ```
-# Example recipe from: https://sylabs.io/guides/3.7/user-guide/running_services.html
+# Example recipe from: https://singularity.hpcng.org/user-docs/3.7/running_services.html
 
 Bootstrap: docker
 From: nginx:1.20
