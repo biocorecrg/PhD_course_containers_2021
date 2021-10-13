@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.2 Using existing images | PhD Course 2021: Linux containers in scientific environments</title>
+  <meta name="description" content="3.2 Using existing images | PhD Course 2021: Linux containers in scientific environments" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.2 Using existing images | PhD Course 2021: Linux containers in scientific environments" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.2 Using existing images | PhD Course 2021: Linux containers in scientific environments" />
+  
+  
+  
+
+<meta name="author" content="Luca Cozzuto, Toni Hermoso, Julia Ponomarenko" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-docker.html"/>
+<link rel="next" href="exercise-1---docker-as-a-user.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PhD Course 2021 - Containers</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome and about the course</a><ul>
+<li class="chapter" data-level="1.1" data-path="meet-the-organizers-and-instructors.html"><a href="meet-the-organizers-and-instructors.html"><i class="fa fa-check"></i><b>1.1</b> Meet the organizers and instructors</a></li>
+<li class="chapter" data-level="1.2" data-path="about-the-course.html"><a href="about-the-course.html"><i class="fa fa-check"></i><b>1.2</b> About the course</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="about-the-course.html"><a href="about-the-course.html#outline"><i class="fa fa-check"></i><b>1.2.1</b> Outline</a></li>
+<li class="chapter" data-level="1.2.2" data-path="about-the-course.html"><a href="about-the-course.html#learning-objectives"><i class="fa fa-check"></i><b>1.2.2</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.2.3" data-path="about-the-course.html"><a href="about-the-course.html#prerequisite-technical-requirements"><i class="fa fa-check"></i><b>1.2.3</b> Prerequisite / technical requirements</a></li>
+<li class="chapter" data-level="1.2.4" data-path="about-the-course.html"><a href="about-the-course.html#dates-time-location"><i class="fa fa-check"></i><b>1.2.4</b> Dates, time, location</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="program.html"><a href="program.html"><i class="fa fa-check"></i><b>1.3</b> Program</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-containers.html"><a href="introduction-to-containers.html"><i class="fa fa-check"></i><b>2</b> Introduction to containers</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-are-containers.html"><a href="what-are-containers.html"><i class="fa fa-check"></i><b>2.1</b> What are containers ?</a></li>
+<li class="chapter" data-level="2.2" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html"><i class="fa fa-check"></i><b>2.2</b> Virtual machines or containers ?</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html#virtualisation"><i class="fa fa-check"></i><b>2.2.1</b> Virtualisation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html#containerisation-aka-lightweight-virtualisation"><i class="fa fa-check"></i><b>2.2.2</b> Containerisation (aka lightweight virtualisation)</a></li>
+<li class="chapter" data-level="2.2.3" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html#virtual-machines-vs-containers"><i class="fa fa-check"></i><b>2.2.3</b> Virtual machines vs containers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="history-of-containers.html"><a href="history-of-containers.html"><i class="fa fa-check"></i><b>2.3</b> History of containers</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="history-of-containers.html"><a href="history-of-containers.html#chroot"><i class="fa fa-check"></i><b>2.3.1</b> chroot</a></li>
+<li class="chapter" data-level="2.3.2" data-path="history-of-containers.html"><a href="history-of-containers.html#additions-in-linux-kernel"><i class="fa fa-check"></i><b>2.3.2</b> Additions in Linux kernel</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>3</b> Docker</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-docker.html"><a href="introduction-to-docker.html"><i class="fa fa-check"></i><b>3.1</b> Introduction to Docker</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="introduction-to-docker.html"><a href="introduction-to-docker.html#what-is-docker"><i class="fa fa-check"></i><b>3.1.1</b> What is Docker?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="introduction-to-docker.html"><a href="introduction-to-docker.html#docker-components"><i class="fa fa-check"></i><b>3.1.2</b> Docker components</a></li>
+<li class="chapter" data-level="3.1.3" data-path="introduction-to-docker.html"><a href="introduction-to-docker.html#images-versus-containers"><i class="fa fa-check"></i><b>3.1.3</b> Images versus containers</a></li>
+<li class="chapter" data-level="3.1.4" data-path="introduction-to-docker.html"><a href="introduction-to-docker.html#docker-vocabulary"><i class="fa fa-check"></i><b>3.1.4</b> Docker vocabulary</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="using-existing-images.html"><a href="using-existing-images.html"><i class="fa fa-check"></i><b>3.2</b> Using existing images</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="using-existing-images.html"><a href="using-existing-images.html#getting-started"><i class="fa fa-check"></i><b>3.2.1</b> Getting started</a></li>
+<li class="chapter" data-level="3.2.2" data-path="using-existing-images.html"><a href="using-existing-images.html#explore-docker-hub"><i class="fa fa-check"></i><b>3.2.2</b> Explore Docker Hub</a></li>
+<li class="chapter" data-level="3.2.3" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-pull-import-an-image"><i class="fa fa-check"></i><b>3.2.3</b> docker pull: import an image</a></li>
+<li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.4</b> docker run: run image, i.e. start a container</a></li>
+<li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.5</b> docker ps: check containers status</a></li>
+<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-a-running-container"><i class="fa fa-check"></i><b>3.2.6</b> docker exec: execute process in a running container</a></li>
+<li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.7</b> docker stop, start, restart: actions on container</a></li>
+<li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.8</b> docker rm, docker rmi: clean up!</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="exercise-1---docker-as-a-user.html"><a href="exercise-1---docker-as-a-user.html"><i class="fa fa-check"></i><b>3.3</b> Exercise 1 - Docker as a user</a></li>
+<li class="chapter" data-level="3.4" data-path="linux-packages.html"><a href="linux-packages.html"><i class="fa fa-check"></i><b>3.4</b> Linux packages</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="linux-packages.html"><a href="linux-packages.html#update-and-upgrade-packages"><i class="fa fa-check"></i><b>3.4.1</b> Update and upgrade packages</a></li>
+<li class="chapter" data-level="3.4.2" data-path="linux-packages.html"><a href="linux-packages.html#search-and-install-packages"><i class="fa fa-check"></i><b>3.4.2</b> Search and install packages:</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.5</b> Docker recipes</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="docker-recipes.html"><a href="docker-recipes.html#writing-recipes-and-building-images"><i class="fa fa-check"></i><b>3.5.1</b> Writing recipes and building images</a></li>
+<li class="chapter" data-level="3.5.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.5.2</b> docker tag</a></li>
+<li class="chapter" data-level="3.5.3" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.5.3</b> Build cache</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="exercise-2---docker-recipes-and-build-images.html"><a href="exercise-2---docker-recipes-and-build-images.html"><i class="fa fa-check"></i><b>3.6</b> Exercise 2 - Docker recipes and build images</a></li>
+<li class="chapter" data-level="3.7" data-path="additional-commands.html"><a href="additional-commands.html"><i class="fa fa-check"></i><b>3.7</b> Additional commands</a></li>
+<li class="chapter" data-level="3.8" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.8</b> Volumes</a></li>
+<li class="chapter" data-level="3.9" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.9</b> Ports</a></li>
+<li class="chapter" data-level="3.10" data-path="integrative-examples.html"><a href="integrative-examples.html"><i class="fa fa-check"></i><b>3.10</b> Integrative examples</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="integrative-examples.html"><a href="integrative-examples.html#fastqc-web-application"><i class="fa fa-check"></i><b>3.10.1</b> FASTQC Web Application</a></li>
+<li class="chapter" data-level="3.10.2" data-path="integrative-examples.html"><a href="integrative-examples.html#shiny-application"><i class="fa fa-check"></i><b>3.10.2</b> Shiny Application</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="publish-images.html"><a href="publish-images.html"><i class="fa fa-check"></i><b>3.11</b> Publish images</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="publish-images.html"><a href="publish-images.html#push-an-image"><i class="fa fa-check"></i><b>3.11.1</b> Push an image</a></li>
+<li class="chapter" data-level="3.11.2" data-path="publish-images.html"><a href="publish-images.html#automatic-builds"><i class="fa fa-check"></i><b>3.11.2</b> Automatic builds</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="exercise-3---docker-volumes-and-ports.html"><a href="exercise-3---docker-volumes-and-ports.html"><i class="fa fa-check"></i><b>3.12</b> Exercise 3 - Docker volumes and ports</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
+<li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html#singularity-architecture"><i class="fa fa-check"></i><b>4.1.1</b> Singularity architecture</a></li>
+<li class="chapter" data-level="4.1.2" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html#strengths"><i class="fa fa-check"></i><b>4.1.2</b> Strengths</a></li>
+<li class="chapter" data-level="4.1.3" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html#weaknesses"><i class="fa fa-check"></i><b>4.1.3</b> Weaknesses</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="build-process.html"><a href="build-process.html"><i class="fa fa-check"></i><b>4.2</b> Build process</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="build-process.html"><a href="build-process.html#examples"><i class="fa fa-check"></i><b>4.2.1</b> Examples</a></li>
+<li class="chapter" data-level="4.2.2" data-path="build-process.html"><a href="build-process.html#sandboxing"><i class="fa fa-check"></i><b>4.2.2</b> Sandboxing</a></li>
+<li class="chapter" data-level="4.2.3" data-path="build-process.html"><a href="build-process.html#singularity-recipes"><i class="fa fa-check"></i><b>4.2.3</b> Singularity recipes</a></li>
+<li class="chapter" data-level="4.2.4" data-path="build-process.html"><a href="build-process.html#remote-building"><i class="fa fa-check"></i><b>4.2.4</b> Remote building</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html"><i class="fa fa-check"></i><b>4.3</b> Run and execution process</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#singularity-shell"><i class="fa fa-check"></i><b>4.3.1</b> Singularity shell</a></li>
+<li class="chapter" data-level="4.3.2" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#singularity-exec"><i class="fa fa-check"></i><b>4.3.2</b> Singularity exec</a></li>
+<li class="chapter" data-level="4.3.3" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#singularity-run"><i class="fa fa-check"></i><b>4.3.3</b> Singularity run</a></li>
+<li class="chapter" data-level="4.3.4" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#environment-control"><i class="fa fa-check"></i><b>4.3.4</b> Environment control</a></li>
+<li class="chapter" data-level="4.3.5" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#execute-from-sandboxed-images-directories"><i class="fa fa-check"></i><b>4.3.5</b> Execute from sandboxed images / directories</a></li>
+<li class="chapter" data-level="4.3.6" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#execute-straight-from-a-registry"><i class="fa fa-check"></i><b>4.3.6</b> Execute straight from a registry</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="bind-paths-aka-volumes.html"><a href="bind-paths-aka-volumes.html"><i class="fa fa-check"></i><b>4.4</b> Bind paths (aka volumes)</a></li>
+<li class="chapter" data-level="4.5" data-path="example-execution.html"><a href="example-execution.html"><i class="fa fa-check"></i><b>4.5</b> Example execution:</a></li>
+<li class="chapter" data-level="4.6" data-path="instances.html"><a href="instances.html"><i class="fa fa-check"></i><b>4.6</b> Instances</a></li>
+<li class="chapter" data-level="4.7" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>4.7</b> Troubleshooting</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="troubleshooting.html"><a href="troubleshooting.html#fakeroot"><i class="fa fa-check"></i><b>4.7.1</b> Fakeroot</a></li>
+<li class="chapter" data-level="4.7.2" data-path="troubleshooting.html"><a href="troubleshooting.html#singularity-cache-directory"><i class="fa fa-check"></i><b>4.7.2</b> Singularity cache directory</a></li>
+<li class="chapter" data-level="4.7.3" data-path="troubleshooting.html"><a href="troubleshooting.html#global-singularity-configuration"><i class="fa fa-check"></i><b>4.7.3</b> Global singularity configuration</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="exercise-4---singularity-running-and-building.html"><a href="exercise-4---singularity-running-and-building.html"><i class="fa fa-check"></i><b>4.8</b> Exercise 4 - Singularity running and building</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="exercise-4---singularity-running-and-building.html"><a href="exercise-4---singularity-running-and-building.html#blast-command-line-1"><i class="fa fa-check"></i><b>4.8.1</b> Blast command-line (1)</a></li>
+<li class="chapter" data-level="4.8.2" data-path="exercise-4---singularity-running-and-building.html"><a href="exercise-4---singularity-running-and-building.html#blast-command-line-2"><i class="fa fa-check"></i><b>4.8.2</b> Blast command-line (2)</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://biocore.crg.eu/" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PhD Course 2021: Linux containers in scientific environments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="using-existing-images" class="section level2">
+<h2><span class="header-section-number">3.2</span> Using existing images</h2>
+<div id="getting-started" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Getting started</h3>
+<p>Run the following in the terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="using-existing-images.html#cb3-1"></a><span class="ex">docker</span> images</span></code></pre></div>
+<p>The <code>docker images</code> command lists the Docker images that you have on your computer.
+<br>
+Now run the following:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="using-existing-images.html#cb4-1"></a><span class="ex">docker</span> pull hello-world</span></code></pre></div>
+<p>Run <code>docker images</code> again: now you see the “hello-world” image listed!
+<br>
+<code>docker pull</code> imports by default an image from <strong>Docker Hub</strong>.</p>
+<p><br>
+We will see in more details the <code>docker images</code> and <code>docker run</code> commands, but let’s first explore the <strong>Docker images repositories</strong>.</p>
+</div>
+<div id="explore-docker-hub" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Explore Docker Hub</h3>
+<p>Images can be stored locally or shared in a registry.
+<br>
+<a href="https://hub.docker.com/">Docker hub</a> is the main public registry for Docker images.
+<br></p>
+<p>Let’s search the keyword <strong>ubuntu</strong>:</p>
+<p><img src="docs/images/dockerhub_ubuntu.png" width="900/"></p>
+<p>You can also search existing Docker images with the <code>docker search</code> command.
+<br>
+Example: let’s look for images that have the keyword <strong>blast</strong> in their name or description.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="using-existing-images.html#cb5-1"></a><span class="ex">docker</span> search blast</span></code></pre></div>
+<p>Too many results? You can apply some filters:</p>
+<ul>
+<li>Minimum number of <strong>stars</strong>: <code>docker search blast --filter stars=5</code></li>
+<li>The image is an <a href="https://docs.docker.com/docker-hub/official_images/"><strong>official build</strong></a>: <code>docker search blast --filter is-official=true</code></li>
+<li>The image is an <a href="https://docs.docker.com/docker-hub/builds/"><strong>automated build</strong></a>: <code>docker search blast --filter is-automated=true</code></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="using-existing-images.html#cb6-1"></a><span class="co"># Apply one filter</span></span>
+<span id="cb6-2"><a href="using-existing-images.html#cb6-2"></a><span class="ex">docker</span> search blast --filter stars=2</span>
+<span id="cb6-3"><a href="using-existing-images.html#cb6-3"></a></span>
+<span id="cb6-4"><a href="using-existing-images.html#cb6-4"></a><span class="co"># Apply more than one filter</span></span>
+<span id="cb6-5"><a href="using-existing-images.html#cb6-5"></a><span class="ex">docker</span> search blast --filter is-automated=true --filter stars=2</span></code></pre></div>
+<p><a href="https://vsupalov.com/docker-latest-tag/">https://vsupalov.com/docker-latest-tag/</a> to read more about the latest tag</p>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<p>Use <code>docker search</code> to find a Docker image for the keyword <code>ubuntu</code>. Using the filters, answer the following questions:</p>
+<ul>
+<li>How many images are <strong>official builds</strong>?</li>
+<li>How many images have <strong>3 or more stars</strong>?</li>
+<li>How many images are <strong>official builds</strong> AND have <strong>3 or more stars</strong>?</li>
+<li>What is the NAME of the image with the highest number of stars?</li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="using-existing-images.html#cb7-1"></a><span class="co"># Official builds</span></span>
+<span id="cb7-2"><a href="using-existing-images.html#cb7-2"></a><span class="ex">docker</span> search ubuntu --filter is-official=true</span>
+<span id="cb7-3"><a href="using-existing-images.html#cb7-3"></a></span>
+<span id="cb7-4"><a href="using-existing-images.html#cb7-4"></a><span class="co"># 3 or more stars</span></span>
+<span id="cb7-5"><a href="using-existing-images.html#cb7-5"></a><span class="ex">docker</span> search ubuntu --filter stars=3</span>
+<span id="cb7-6"><a href="using-existing-images.html#cb7-6"></a></span>
+<span id="cb7-7"><a href="using-existing-images.html#cb7-7"></a><span class="co"># Both filters</span></span>
+<span id="cb7-8"><a href="using-existing-images.html#cb7-8"></a><span class="ex">docker</span> search ubuntu --filter is-official=true --filter stars=3</span></code></pre></div>
+</details>
+</div>
+<div id="docker-pull-import-an-image" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> docker pull: import an image</h3>
+<p>Say we are now interested in the <code>ubuntu</code> image from Docker Hub. We can retrieve it with <code>docker pull</code>.</p>
+<ul>
+<li>By default, we get the latest image / latest release.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="using-existing-images.html#cb8-1"></a><span class="ex">docker</span> pull ubuntu</span></code></pre></div>
+<p><img src="docs/images/docker_pull.png" width="650/"></p>
+<ul>
+<li>You can choose the version of Ubuntu you are fetching; for that, check different tags on the website (<em>latest</em> is also a tag):</li>
+</ul>
+<p><img src="docs/images/dockerhub_ubuntu_tags.png" width="850/"></p>
+<blockquote>
+<p>Note: <code>docker search</code> doesn’t allow to search for tags.</p>
+</blockquote>
+<p>Let’s get the Ubuntu image with tag <strong>18.04</strong> (version 18.04 of Ubuntu = bionic):</p>
+<p><img src="docs/images/dockerhub_ubuntu_1804.png" width="850/"></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="using-existing-images.html#cb9-1"></a><span class="ex">docker</span> pull ubuntu:18.04</span></code></pre></div>
+<p><strong>Where is the image now?</strong>
+<br>
+As we have seen before, you can run <code>docker images</code> in the terminal to see a list of the most recently created images. The command <code>docker images</code> gives you information about:</p>
+<ul>
+<li>Repository.</li>
+<li>Tag.</li>
+<li>Unique image ID (Digest).</li>
+<li>Creation date.</li>
+<li>Image size.</li>
+</ul>
+<p><img src="docs/images/docker_images_list.png" width="650/"></p>
+
+<div class="rmdnote">
+<p>Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using <strong><em>docker pull</em></strong>. If the OS/Architecture from the client is not present, an error is raised.</p>
+<strong>IMPORTANT:</strong> Digest ID present in Docker hub is <strong>NOT</strong> the same (or a shortened version) of the Image ID you can see when doing <strong>docker images</strong>. Details: <a href="https://stackoverflow.com/questions/56364643/whats-the-difference-between-a-docker-images-image-id-and-its-digest" class="uri">https://stackoverflow.com/questions/56364643/whats-the-difference-between-a-docker-images-image-id-and-its-digest</a>
+</div>
+
+
+<div class="rmdtip">
+It is actually possible, and it can be advisable for reproducibility reasons, to pull an image with a specific digest ID. Example: docker pull <a href="mailto:ubuntu@sha256" class="email">ubuntu@sha256</a>:86ac87f73641c920fb42cc9612d4fb57b5626b56ea2a19b894d0673fd5b4f2e9
+</div>
+
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<ul>
+<li>Run command <code>docker images</code>. How many images do you get?</li>
+<li>Pull the version 2.2.31 of the <a href="https://hub.docker.com/r/biocontainers/blast/"><code>biocontainers/blast</code></a> image
+<ul>
+<li>What is the size of the <code>blast</code> image you just pulled?</li>
+</ul></li>
+<li>How many images do you get if you run <code>docker images --all</code>? What are these images? Check <a href="https://docs.docker.com/engine/reference/commandline/images/">documentation</a> for help.</li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="using-existing-images.html#cb10-1"></a><span class="co"># Pull the blast image</span></span>
+<span id="cb10-2"><a href="using-existing-images.html#cb10-2"></a><span class="ex">docker</span> pull biocontainers/blast:2.2.31</span>
+<span id="cb10-3"><a href="using-existing-images.html#cb10-3"></a></span>
+<span id="cb10-4"><a href="using-existing-images.html#cb10-4"></a><span class="co"># Run `docker images --all`</span></span>
+<span id="cb10-5"><a href="using-existing-images.html#cb10-5"></a><span class="ex">docker</span> images --all <span class="co"># intermediate images.</span></span></code></pre></div>
+</details>
+</div>
+<div id="docker-run-run-image-i.e.-start-a-container" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> docker run: run image, i.e. start a container</h3>
+<p>Now we want to use what is <strong>inside</strong> the image.
+<br>
+Command <code>docker run</code> creates a fresh container (active instance of the image) from a <strong>Docker (static) image</strong>, and runs it.</p>
+<p><br>
+The format is:<br></p>
+<p>docker run image:tag <strong>command</strong> (command being a command called <em>inside the image</em>)</p>
+<p><br>
+We can start a container from the <strong>ubuntu tag 18.04 image</strong>, executing the command <code>ls</code> (stored in /bin in the container).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="using-existing-images.html#cb11-1"></a><span class="ex">docker</span> run ubuntu:18.04 /bin/ls</span></code></pre></div>
+<p><img src="docs/images/docker_run_ls.png" width="200/"></p>
+<p>Now execute <code>ls</code> in your current working directory: is the result the same?</p>
+<p>You can execute any program/command that is stored inside the image:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="using-existing-images.html#cb12-1"></a><span class="ex">docker</span> run ubuntu:18.04 /bin/whoami</span>
+<span id="cb12-2"><a href="using-existing-images.html#cb12-2"></a><span class="ex">docker</span> run ubuntu:18.04 cat /etc/issue</span></code></pre></div>
+<p>You can either execute programs in the image from the command line (see above) or <strong>execute a container interactively</strong>; that is, <strong>“enter”</strong> the container, using command <code>docker run -it</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="using-existing-images.html#cb13-1"></a><span class="ex">docker</span> run -it ubuntu:18.04 /bin/bash</span></code></pre></div>
+<p>If you want to leave and stop the container, type <code>exit</code> and ENTER.</p>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<ul>
+<li>Run the <strong>hello-world</strong> image:
+<ul>
+<li>What is happening?</li>
+</ul></li>
+<li>Now run the <strong>blast</strong> image we previously pulled:
+<ul>
+<li>Is something happening?</li>
+</ul></li>
+<li>Start again a container from the same <strong>blast</strong> image (not interactively), and run <strong>blastp</strong>. What happens?</li>
+<li>Start a container <strong>interactively</strong> from the same <strong>blast</strong> image:
+<ul>
+<li>What is the default working directory? What is inside this directory?</li>
+<li>Where is the <code>blastp</code> program located in the image?</li>
+<li>Exit the container.</li>
+</ul></li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="using-existing-images.html#cb14-1"></a><span class="co"># Run the hello-world image</span></span>
+<span id="cb14-2"><a href="using-existing-images.html#cb14-2"></a><span class="ex">docker</span> run hello-world</span>
+<span id="cb14-3"><a href="using-existing-images.html#cb14-3"></a></span>
+<span id="cb14-4"><a href="using-existing-images.html#cb14-4"></a><span class="co"># Run the blast image</span></span>
+<span id="cb14-5"><a href="using-existing-images.html#cb14-5"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31</span>
+<span id="cb14-6"><a href="using-existing-images.html#cb14-6"></a></span>
+<span id="cb14-7"><a href="using-existing-images.html#cb14-7"></a><span class="co">#  Start again a container from the same blast image, and run the path to the blastp command:</span></span>
+<span id="cb14-8"><a href="using-existing-images.html#cb14-8"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31 blastp</span>
+<span id="cb14-9"><a href="using-existing-images.html#cb14-9"></a></span>
+<span id="cb14-10"><a href="using-existing-images.html#cb14-10"></a><span class="co"># Start a container interactively from the same blast image:</span></span>
+<span id="cb14-11"><a href="using-existing-images.html#cb14-11"></a><span class="ex">docker</span> run -ti biocontainers/blast:2.2.31</span>
+<span id="cb14-12"><a href="using-existing-images.html#cb14-12"></a></span>
+<span id="cb14-13"><a href="using-existing-images.html#cb14-13"></a>  <span class="co"># What is the default working directory?</span></span>
+<span id="cb14-14"><a href="using-existing-images.html#cb14-14"></a>  <span class="bu">pwd</span><span class="kw">;</span> <span class="fu">ls</span></span>
+<span id="cb14-15"><a href="using-existing-images.html#cb14-15"></a>  <span class="co"># Where is the `blastp` program located in the image?</span></span>
+<span id="cb14-16"><a href="using-existing-images.html#cb14-16"></a>  <span class="fu">which</span> blastp</span>
+<span id="cb14-17"><a href="using-existing-images.html#cb14-17"></a>  <span class="co"># Exit the container.</span></span>
+<span id="cb14-18"><a href="using-existing-images.html#cb14-18"></a>  <span class="bu">exit</span></span></code></pre></div>
+</details>
+<blockquote>
+<p>Note about Docker inside Docker: <em>“Although running Docker inside Docker is generally not recommended, there are some legitimate use cases, such as development of Docker itself.”</em> <a href="https://hub.docker.com/_/docker">https://hub.docker.com/_/docker</a></p>
+</blockquote>
+<p>You can run the container as daemon (in background), instead of the default foreground running, with the <code>--detach</code> parameter:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="using-existing-images.html#cb15-1"></a><span class="ex">docker</span> run --detach ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+<p>Run container as daemon (in background) with a given name:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="using-existing-images.html#cb16-1"></a><span class="ex">docker</span> run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+</div>
+<div id="docker-ps-check-containers-status" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> docker ps: check containers status</h3>
+<p>List running containers:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="using-existing-images.html#cb17-1"></a><span class="ex">docker</span> ps</span></code></pre></div>
+<p>List all containers (whether they are running or not):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="using-existing-images.html#cb18-1"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
+<p>Each container has a <strong>unique ID</strong>.</p>
+</div>
+<div id="docker-exec-execute-process-in-a-running-container" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> docker exec: execute process in a running container</h3>
+<p>Difference between <code>docker run</code> and <code>docker exec</code>:</p>
+<ul>
+<li><code>docker run</code> creates a temporary container, runs the command and stops the container.</li>
+<li><code>docker exec</code> needs an <strong>already running container</strong> to query the command (that is, a <em>detached</em> container).</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="using-existing-images.html#cb19-1"></a><span class="ex">docker</span> exec myubuntu uname -a</span></code></pre></div>
+<ul>
+<li>Interactively</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="using-existing-images.html#cb20-1"></a><span class="ex">docker</span> exec -it myubuntu /bin/bash</span></code></pre></div>
+</div>
+<div id="docker-stop-start-restart-actions-on-container" class="section level3">
+<h3><span class="header-section-number">3.2.7</span> docker stop, start, restart: actions on container</h3>
+<p>Stop a running container with <code>docker stop</code>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="using-existing-images.html#cb21-1"></a><span class="co"># check the list of running containers</span></span>
+<span id="cb21-2"><a href="using-existing-images.html#cb21-2"></a><span class="ex">docker</span> ps</span>
+<span id="cb21-3"><a href="using-existing-images.html#cb21-3"></a></span>
+<span id="cb21-4"><a href="using-existing-images.html#cb21-4"></a><span class="co"># stop the myubuntu container</span></span>
+<span id="cb21-5"><a href="using-existing-images.html#cb21-5"></a><span class="ex">docker</span> stop myubuntu</span>
+<span id="cb21-6"><a href="using-existing-images.html#cb21-6"></a></span>
+<span id="cb21-7"><a href="using-existing-images.html#cb21-7"></a><span class="co"># check the list of all containers</span></span>
+<span id="cb21-8"><a href="using-existing-images.html#cb21-8"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
+<p>Start a stopped container (does NOT create a new one):</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="using-existing-images.html#cb22-1"></a><span class="ex">docker</span> start myubuntu</span>
+<span id="cb22-2"><a href="using-existing-images.html#cb22-2"></a></span>
+<span id="cb22-3"><a href="using-existing-images.html#cb22-3"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
+<p>Restart a running container:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="using-existing-images.html#cb23-1"></a><span class="ex">docker</span> restart myubuntu</span>
+<span id="cb23-2"><a href="using-existing-images.html#cb23-2"></a></span>
+<span id="cb23-3"><a href="using-existing-images.html#cb23-3"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
+<p>Run with restart is enabled (by default, when exits, Docker does not automatically restart the container).
+<br>
+In the example below, we start a <strong>detached container named “myubuntu2”</strong> with the <strong>unless-stopped</strong> restart policy: <em>restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.</em></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="using-existing-images.html#cb24-1"></a><span class="ex">docker</span> run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/run/#restart-policies---restart">Restart policies</a>: no (default), always, on-failure, unless-stopped</li>
+</ul>
+<p>Update restart policy:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="using-existing-images.html#cb25-1"></a><span class="ex">docker</span> update --restart unless-stopped myubuntu</span></code></pre></div>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<ul>
+<li>Start a container from the “hello-world” image <strong>in the background</strong>. Give it a name.
+<ul>
+<li>Is your container running? Can you explain why (or why not)?</li>
+</ul></li>
+<li>Start another detached container from the same image (with a new name), with the <strong>always restart policy</strong>.
+<ul>
+<li>Is the container running?</li>
+</ul></li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="using-existing-images.html#cb26-1"></a><span class="co"># start a &quot;detached&quot; container (in the background)</span></span>
+<span id="cb26-2"><a href="using-existing-images.html#cb26-2"></a><span class="ex">docker</span> run --detach --name helloworld1 hello-world</span>
+<span id="cb26-3"><a href="using-existing-images.html#cb26-3"></a></span>
+<span id="cb26-4"><a href="using-existing-images.html#cb26-4"></a><span class="co"># start a &quot;detached&quot; container with the &quot;--restart=always&quot; option</span></span>
+<span id="cb26-5"><a href="using-existing-images.html#cb26-5"></a><span class="ex">docker</span> run --detach --restart=always --name helloworld2 hello-world</span></code></pre></div>
+</details>
+</div>
+<div id="docker-rm-docker-rmi-clean-up" class="section level3">
+<h3><span class="header-section-number">3.2.8</span> docker rm, docker rmi: clean up!</h3>
+<p><code>docker rm</code> is used to remove a <strong>container</strong> (set <code>-f</code> is the container is running, to force the removal):</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="using-existing-images.html#cb27-1"></a><span class="ex">docker</span> rm myubuntu</span>
+<span id="cb27-2"><a href="using-existing-images.html#cb27-2"></a><span class="ex">docker</span> rm -f myubuntu</span></code></pre></div>
+<p><code>docker rmi</code> is used to remove an <strong>image</strong>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="using-existing-images.html#cb28-1"></a><span class="ex">docker</span> rmi ubuntu:18.04</span></code></pre></div>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<ul>
+<li>Remove any container (whether it is running or not).</li>
+<li>Remove the “hello-world” image.</li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="using-existing-images.html#cb29-1"></a><span class="co"># check all containers</span></span>
+<span id="cb29-2"><a href="using-existing-images.html#cb29-2"></a><span class="ex">docker</span> ps -a</span>
+<span id="cb29-3"><a href="using-existing-images.html#cb29-3"></a></span>
+<span id="cb29-4"><a href="using-existing-images.html#cb29-4"></a><span class="co"># remove by their ID:</span></span>
+<span id="cb29-5"><a href="using-existing-images.html#cb29-5"></a><span class="ex">docker</span> rm -f CONTAINER1_ID CONTAINER2_ID ...</span>
+<span id="cb29-6"><a href="using-existing-images.html#cb29-6"></a></span>
+<span id="cb29-7"><a href="using-existing-images.html#cb29-7"></a><span class="co"># remove the &quot;hello-world&quot; image</span></span>
+<span id="cb29-8"><a href="using-existing-images.html#cb29-8"></a><span class="ex">docker</span> rmi hello-world</span></code></pre></div>
+</details>
+<div id="major-clean" class="section level4">
+<h4><span class="header-section-number">3.2.8.1</span> Major clean</h4>
+<p>Check used space:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="using-existing-images.html#cb30-1"></a><span class="ex">docker</span> system df</span></code></pre></div>
+<p>Remove unused containers (and others) - <strong>DO WITH CARE</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="using-existing-images.html#cb31-1"></a><span class="ex">docker</span> system prune</span></code></pre></div>
+<p>Remove ALL non-running containers, images, etc. - <strong>DO WITH MUCH MORE CARE!!!</strong></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="using-existing-images.html#cb32-1"></a><span class="ex">docker</span> system prune -a</span></code></pre></div>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes">Reference</a></li>
+</ul>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-docker.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise-1---docker-as-a-user.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["phd_course_containers_2021.pdf", "phd_course_containers_2021.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
