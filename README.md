@@ -3,7 +3,7 @@
 ## Title
 
 Reproducible research and data analysis with Linux containers
-<br>
+
 Course page: https://biocorecrg.github.io/PhD_course_containers_2021/
 
 ## About the course
