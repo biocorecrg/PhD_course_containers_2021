@@ -62,6 +62,7 @@ introduction-to-singularity
 singularity-architecture
 strengths
 weaknesses
+warning
 build-process
 examples
 through-registries
@@ -69,13 +70,12 @@ docker-hub
 biocontainers
 via-quay.io
 via-galaxy-project-prebuilt-images
-sylabs-registry
+singularity-catalog
 docker-daemon
 sandboxing
 singularity-recipes
 docker-bootstrap
 debian-bootstrap
-remote-building
 run-and-execution-process
 singularity-shell
 singularity-exec
