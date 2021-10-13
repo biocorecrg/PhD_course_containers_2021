@@ -1515,8 +1515,9 @@ docker push toniher/fastqc-example:latest
 
 
 ```{block2, type='rdmnote'}
-As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling.
+As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling (e.g., docker push quay.io/toniher/myrepo)
 ```
+
 
 ```{block2, type='rdmnote'}
 Docker Hub PRO users have the option to have [automatic builds](https://docs.docker.com/docker-hub/builds/) generated when there is a change in an associated Git repository (Github). Alternatively, you can [use Github Actions](https://github.com/marketplace/actions/build-and-push-docker-images).
