@@ -1272,7 +1272,7 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
-1. Copy the 2 fastq files from the [Github repository](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata) and place them in mounted directory.
+1. Copy the 2 fastq files from the [Github repository](https://github.com/biocorecrg/PhD_course_containers_2021/tree/main/testdata) and place them in mounted directory.
 2. Run fastqc interactively (inside container): `fastqc /scratch/*.gz`
 3. Run fastqc outside the container
 
@@ -1283,8 +1283,8 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 
 ```{bash}
 # Download test fastq files (manually or using the following commands) and place them in "datatest":
-wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_H3K4me1_s_chr19.fastq.gz?raw=true > datatest/B7_H3K4me1_s_chr19.fastq.gz
-wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true > datatest/B7_input_s_chr19.fastq.gz
+wget -O - https://github.com/biocorecrg/PhD_course_containers_2021/blob/main/testdata/B7_H3K4me1_s_chr19.fastq.gz?raw=true > datatest/B7_H3K4me1_s_chr19.fastq.gz
+wget -O - https://github.com/biocorecrg/PhD_course_containers_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true > datatest/B7_input_s_chr19.fastq.gz
 
 # Mount volumes and start a detached container
 docker run --detach -ti --volume $(pwd)/datatest:/scratch --name fastqc_container_test biocontainers/fastqc:v0.11.9_cv7
@@ -1310,7 +1310,7 @@ docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
-1. Copy the 2 FASTA files from the [Github repository](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata/blast) and place them in mounted directory.
+1. Copy the 2 FASTA files from the [Github repository](https://github.com/biocorecrg/PhD_course_containers_2021/tree/main/testdata/blast) and place them in mounted directory.
 2. Run ```blastp``` inside the container against each other: `blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta`
 3. Run ```blastp``` outside the container and get the result. Do with exec and do all at once with run
 
