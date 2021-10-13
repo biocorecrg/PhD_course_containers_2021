@@ -1518,26 +1518,8 @@ docker push toniher/fastqc-example:latest
 As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling.
 ```
 
-### Automatic builds
-
-* Create a Github repository
-
-* Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with **COPY**) you will need to upload them and place them in a way compatible with the context you choose.
-
-* Configure an automated build from Docker Hub
-
-First you may need to grant permission to Github from your Docker Hub account. More information at: https://docs.docker.com/docker-hub/builds/link-source/
-
-```{r, out.width="60%", echo=FALSE, eval = TRUE}
-knitr::include_graphics('docs/images/dockerhub-automated-build.png')
-```
-
-```{r, out.width="60%", echo=FALSE, eval = TRUE}
-knitr::include_graphics('docs/images/dockerhub-automated-build-details.png')
-```
-
 ```{block2, type='rdmnote'}
-If you cannot trigger the automatic build, it may be because Docker Hub refers by default to **master** branch of Github repositories. Since late 2020, default Branch is **main**, so you might need to explictly put that name there. Some context: https://www.infoq.com/news/2020/10/github-main-branch/
+Docker Hub PRO users have the option to have [automatic builds](https://docs.docker.com/docker-hub/builds/) generated when there is a change in an associated Git repository (Github). Alternatively, you can [use Github Actions](https://github.com/marketplace/actions/build-and-push-docker-images).
 ```
 
 ## Exercise 3 - Docker volumes and ports
