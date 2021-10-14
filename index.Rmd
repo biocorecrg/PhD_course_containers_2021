@@ -15,7 +15,7 @@ link-citations: yes
 
 # Welcome and about the course
 
-This slow-paced hands-on course is designed for absolute beginners who want to start using containers to achieve reproducibility of data analysis. <br>
+This hands-on course is designed for absolute beginners who want to start using containers to achieve reproducibility of data analysis. <br>
 Linux containers allow the storage of code and applications in a host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
 
 

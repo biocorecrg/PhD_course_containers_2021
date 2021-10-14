@@ -15,7 +15,7 @@ Containers allow us to use **exactly the same versions of the tools**.
 
 ## Virtual machines or containers ?
 
-| Virtualisation | Containerisation (aka lightweight virtualisation) | 
+| Virtualisation | Containerisation (aka lightweight virtualisation) |
 | ----- | ----- |
 | Abstraction of physical hardware | Abstraction of application layer |
 | Depends on hypervisor (software) | Depends on host kernel (OS) |
@@ -38,9 +38,9 @@ Containers allow us to use **exactly the same versions of the tools**.
 
 ### Virtual machines vs containers
 
-<a href="https://zdnet2.cbsistatic.com/hub/i/r/2017/05/08/af178c5a-64dd-4900-8447-3abd739757e3/resize/770xauto/78abd09a8d41c182a28118ac0465c914/docker-vm-container.png"><img src="https://zdnet2.cbsistatic.com/hub/i/r/2017/05/08/af178c5a-64dd-4900-8447-3abd739757e3/resize/770xauto/78abd09a8d41c182a28118ac0465c914/docker-vm-container.png" width="800/"></a>
+<a href="https://raw.githubusercontent.com/collabnix/dockerlabs/master/beginners/docker/images/vm-docker5.png"><img src="https://raw.githubusercontent.com/collabnix/dockerlabs/master/beginners/docker/images/vm-docker5.png" width="800/"></a>
 
-[Source](https://www.zdnet.com/article/what-is-docker-and-why-is-it-so-darn-popular/)
+[Source](https://dockerlabs.collabnix.com/beginners/difference-docker-vm.html)
 
 **Pros and cons**
 
