@@ -39,9 +39,6 @@ Contacts below:
 
 ## About the course
 
-### Outline
-
-
 ### Learning objectives
 
 About Linux containers:
@@ -58,7 +55,7 @@ About Linux containers:
 #### Prerequisite
 
 * Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
-* Applicants are not expected to have used Linux containers or Nextflow before.
+* Participants are not expected to have used Linux containers before.
 
 #### Technical requirements
 
@@ -74,18 +71,11 @@ If you are not familiar with the **ssh** protocol, you can learn about it <a hre
 <br>
 * We also encourage you to create a [**Github account**](https://github.com/join) and an associated [**Docker hub account**](https://hub.docker.com/signup).
 
-#### Provided infrastructure
-
-...
-
 ### Dates, time, location
-
-- Location: virtual, via Zoom.
 
 You can find all information in the dedicated course page of the [Moodle platform](https://moodle.crg.eu).
 
 ## Program
-
 
 * Containers: introduction and history.
 * Docker hub: find existing containers.
@@ -109,4 +99,3 @@ You can find all information in the dedicated course page of the [Moodle platfor
   * Understanding and working with volumes.
   * Singularity build recipes.
   * Advanced features: services, etc.
-
