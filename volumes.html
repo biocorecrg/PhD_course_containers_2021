@@ -263,7 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb81-3"><a href="volumes.html#cb81-3"></a><span class="fu">touch</span> datatest/test</span>
 <span id="cb81-4"><a href="volumes.html#cb81-4"></a></span>
 <span id="cb81-5"><a href="volumes.html#cb81-5"></a><span class="co"># Run a container in the background (--detach) and mount the local volume &quot;datatest&quot; (we map it to directory /scratch inside the container)</span></span>
-<span id="cb81-6"><a href="volumes.html#cb81-6"></a><span class="ex">docker</span> run --detach --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null</span>
+<span id="cb81-6"><a href="volumes.html#cb81-6"></a><span class="ex">docker</span> run --detach --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container_<span class="va">${USER}</span> biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null</span>
 <span id="cb81-7"><a href="volumes.html#cb81-7"></a></span>
 <span id="cb81-8"><a href="volumes.html#cb81-8"></a><span class="co"># Execute the container interactively</span></span>
 <span id="cb81-9"><a href="volumes.html#cb81-9"></a><span class="ex">docker</span> exec -ti fastqc_container /bin/bash</span>
@@ -296,18 +296,18 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 <span id="cb82-3"><a href="volumes.html#cb82-3"></a><span class="fu">wget</span> -O - https://github.com/biocorecrg/PhD_course_containers_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true <span class="op">&gt;</span> datatest/B7_input_s_chr19.fastq.gz</span>
 <span id="cb82-4"><a href="volumes.html#cb82-4"></a></span>
 <span id="cb82-5"><a href="volumes.html#cb82-5"></a><span class="co"># Mount volumes and start a detached container</span></span>
-<span id="cb82-6"><a href="volumes.html#cb82-6"></a><span class="ex">docker</span> run --detach -ti --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container_test biocontainers/fastqc:v0.11.9_cv7</span>
+<span id="cb82-6"><a href="volumes.html#cb82-6"></a><span class="ex">docker</span> run --detach -ti --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container_test_<span class="va">${USER}</span> biocontainers/fastqc:v0.11.9_cv7</span>
 <span id="cb82-7"><a href="volumes.html#cb82-7"></a></span>
 <span id="cb82-8"><a href="volumes.html#cb82-8"></a><span class="co"># Execute container interactively and run fastqc</span></span>
-<span id="cb82-9"><a href="volumes.html#cb82-9"></a><span class="ex">docker</span> exec -ti fastqc_container_test /bin/bash</span>
+<span id="cb82-9"><a href="volumes.html#cb82-9"></a><span class="ex">docker</span> exec -ti fastqc_container_test_<span class="va">${USER}</span> /bin/bash</span>
 <span id="cb82-10"><a href="volumes.html#cb82-10"></a><span class="op">&gt;</span> <span class="ex">fastqc</span> /scratch/*.gz</span>
 <span id="cb82-11"><a href="volumes.html#cb82-11"></a></span>
 <span id="cb82-12"><a href="volumes.html#cb82-12"></a><span class="co"># Run fastqc outside the container</span></span>
 <span id="cb82-13"><a href="volumes.html#cb82-13"></a><span class="co"># One by one</span></span>
-<span id="cb82-14"><a href="volumes.html#cb82-14"></a><span class="ex">docker</span> exec fastqc_container_test fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb82-15"><a href="volumes.html#cb82-15"></a><span class="ex">docker</span> exec fastqc_container_test fastqc /scratch/B7_input_s_chr19.fastq.gz</span>
+<span id="cb82-14"><a href="volumes.html#cb82-14"></a><span class="ex">docker</span> exec fastqc_container_test_<span class="va">${USER}</span> fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb82-15"><a href="volumes.html#cb82-15"></a><span class="ex">docker</span> exec fastqc_container_test_<span class="va">${USER}</span> fastqc /scratch/B7_input_s_chr19.fastq.gz</span>
 <span id="cb82-16"><a href="volumes.html#cb82-16"></a><span class="co"># All (using wildcard *)</span></span>
-<span id="cb82-17"><a href="volumes.html#cb82-17"></a><span class="ex">docker</span> exec fastqc_container_test bash -c <span class="st">&#39;ls /scratch/*gz&#39;</span></span></code></pre></div>
+<span id="cb82-17"><a href="volumes.html#cb82-17"></a><span class="ex">docker</span> exec fastqc_container_test_<span class="va">${USER}</span> bash -c <span class="st">&#39;ls /scratch/*gz&#39;</span></span></code></pre></div>
 </details>
 
 <div class="rmdtip">
@@ -331,22 +331,22 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 </h5>
 <p></summary></p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb83-1"><a href="volumes.html#cb83-1"></a><span class="co"># Let&#39;s create the container and we dettach it</span></span>
-<span id="cb83-2"><a href="volumes.html#cb83-2"></a><span class="ex">docker</span> run --detach -ti --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp_test ncbi/blast:2.10.1</span>
+<span id="cb83-2"><a href="volumes.html#cb83-2"></a><span class="ex">docker</span> run --detach -ti --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp_test_<span class="va">${USER}</span> ncbi/blast:2.10.1</span>
 <span id="cb83-3"><a href="volumes.html#cb83-3"></a></span>
 <span id="cb83-4"><a href="volumes.html#cb83-4"></a><span class="co"># Execute container interactively and run blastp</span></span>
 <span id="cb83-5"><a href="volumes.html#cb83-5"></a><span class="ex">docker</span> exec -ti blastp_test /bin/bash</span>
 <span id="cb83-6"><a href="volumes.html#cb83-6"></a><span class="op">&gt;</span> <span class="ex">blastp</span> -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> /scratch/insideout.txt</span>
 <span id="cb83-7"><a href="volumes.html#cb83-7"></a></span>
 <span id="cb83-8"><a href="volumes.html#cb83-8"></a><span class="co"># Run from outside and retrieve in different ways</span></span>
-<span id="cb83-9"><a href="volumes.html#cb83-9"></a><span class="ex">docker</span> exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta</span>
+<span id="cb83-9"><a href="volumes.html#cb83-9"></a><span class="ex">docker</span> exec -ti blastp_test_<span class="va">${USER}</span> blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta</span>
 <span id="cb83-10"><a href="volumes.html#cb83-10"></a></span>
-<span id="cb83-11"><a href="volumes.html#cb83-11"></a><span class="ex">docker</span> exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> out.txt</span>
+<span id="cb83-11"><a href="volumes.html#cb83-11"></a><span class="ex">docker</span> exec -ti blastp_test_<span class="va">${USER}</span> blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> out.txt</span>
 <span id="cb83-12"><a href="volumes.html#cb83-12"></a></span>
-<span id="cb83-13"><a href="volumes.html#cb83-13"></a><span class="ex">docker</span> exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain.txt</span>
+<span id="cb83-13"><a href="volumes.html#cb83-13"></a><span class="ex">docker</span> exec -ti blastp_test_<span class="va">${USER}</span> blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain.txt</span>
 <span id="cb83-14"><a href="volumes.html#cb83-14"></a></span>
-<span id="cb83-15"><a href="volumes.html#cb83-15"></a><span class="ex">docker</span> run --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp1 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> out2.txt</span>
+<span id="cb83-15"><a href="volumes.html#cb83-15"></a><span class="ex">docker</span> run --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp1_<span class="va">${USER}</span> ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> out2.txt</span>
 <span id="cb83-16"><a href="volumes.html#cb83-16"></a></span>
-<span id="cb83-17"><a href="volumes.html#cb83-17"></a><span class="ex">docker</span> run --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp2 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain2.txt</span></code></pre></div>
+<span id="cb83-17"><a href="volumes.html#cb83-17"></a><span class="ex">docker</span> run --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp2_<span class="va">${USER}</span> ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain2.txt</span></code></pre></div>
 </details>
 </div>
             </section>

@@ -290,13 +290,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ENTRYPOINT [&quot;echo&quot;]
 CMD [&quot;I love containers&quot;]</code></pre>
 <p>Build:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb71-1"></a><span class="ex">docker</span> build --file Dockerfile_figlet -t mytest .</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb71-1"></a><span class="ex">docker</span> build --file Dockerfile_figlet -t mytest_<span class="va">${USER}</span> .</span></code></pre></div>
 <p>Run the image:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb72-1"></a><span class="co"># with no argument</span></span>
-<span id="cb72-2"><a href="exercise-2---docker-recipes-and-build-images.html#cb72-2"></a><span class="ex">docker</span> run mytest</span>
+<span id="cb72-2"><a href="exercise-2---docker-recipes-and-build-images.html#cb72-2"></a><span class="ex">docker</span> run mytest_<span class="va">${USER}</span></span>
 <span id="cb72-3"><a href="exercise-2---docker-recipes-and-build-images.html#cb72-3"></a></span>
 <span id="cb72-4"><a href="exercise-2---docker-recipes-and-build-images.html#cb72-4"></a><span class="co"># with argument &quot;Docker course&quot;</span></span>
-<span id="cb72-5"><a href="exercise-2---docker-recipes-and-build-images.html#cb72-5"></a><span class="ex">docker</span> run mytest <span class="st">&quot;Docker course&quot;</span></span></code></pre></div>
+<span id="cb72-5"><a href="exercise-2---docker-recipes-and-build-images.html#cb72-5"></a><span class="ex">docker</span> run mytest_<span class="va">${USER}</span> <span class="st">&quot;Docker course&quot;</span></span></code></pre></div>
 <p>Recipe:</p>
 <pre><code>FROM ubuntu:18.04
 
@@ -308,13 +308,13 @@ RUN apt-get install -y figlet
 ENTRYPOINT [&quot;figlet&quot;]
 CMD [&quot;I love containers&quot;]</code></pre>
 <p>Build the image.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb74-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb74-1"></a><span class="ex">docker</span> build --no-cache --file Dockerfile_figlet -t mytestfiglet .</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb74-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb74-1"></a><span class="ex">docker</span> build --no-cache --file Dockerfile_figlet -t mytestfiglet_<span class="va">${USER}</span> .</span></code></pre></div>
 <p>Run the new image, with the default parameter, then with <strong>“Docker course”</strong> as an argument.</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb75-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb75-1"></a><span class="co"># run with no argument</span></span>
-<span id="cb75-2"><a href="exercise-2---docker-recipes-and-build-images.html#cb75-2"></a><span class="ex">docker</span> run mytestfiglet</span>
+<span id="cb75-2"><a href="exercise-2---docker-recipes-and-build-images.html#cb75-2"></a><span class="ex">docker</span> run mytestfiglet_<span class="va">${USER}</span></span>
 <span id="cb75-3"><a href="exercise-2---docker-recipes-and-build-images.html#cb75-3"></a></span>
 <span id="cb75-4"><a href="exercise-2---docker-recipes-and-build-images.html#cb75-4"></a><span class="co"># run with argument &quot;Docker course&quot;</span></span>
-<span id="cb75-5"><a href="exercise-2---docker-recipes-and-build-images.html#cb75-5"></a><span class="ex">docker</span> run mytestfiglet <span class="st">&quot;Docker course&quot;</span></span></code></pre></div>
+<span id="cb75-5"><a href="exercise-2---docker-recipes-and-build-images.html#cb75-5"></a><span class="ex">docker</span> run mytestfiglet_<span class="va">${USER}</span> <span class="st">&quot;Docker course&quot;</span></span></code></pre></div>
 </details>
 <ol start="2" style="list-style-type: decimal">
 <li><u>Random numbers</u>
@@ -359,9 +359,9 @@ ENTRYPOINT [&quot;/usr/bin/bash&quot;, &quot;random_numbers.bash&quot;]
 # default argument (that can be changed on the command line)
 CMD [&quot;2&quot;]</code></pre>
 <p>Build and run:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb78-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb78-1"></a><span class="ex">docker</span> build -f Dockerfile_RN -t random_numbers .</span>
-<span id="cb78-2"><a href="exercise-2---docker-recipes-and-build-images.html#cb78-2"></a><span class="ex">docker</span> run random_numbers</span>
-<span id="cb78-3"><a href="exercise-2---docker-recipes-and-build-images.html#cb78-3"></a><span class="ex">docker</span> run random_numbers 10</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb78-1"><a href="exercise-2---docker-recipes-and-build-images.html#cb78-1"></a><span class="ex">docker</span> build -f Dockerfile_RN -t random_numbers_<span class="va">${USER}</span> .</span>
+<span id="cb78-2"><a href="exercise-2---docker-recipes-and-build-images.html#cb78-2"></a><span class="ex">docker</span> run random_numbers_<span class="va">${USER}</span></span>
+<span id="cb78-3"><a href="exercise-2---docker-recipes-and-build-images.html#cb78-3"></a><span class="ex">docker</span> run random_numbers_<span class="va">${USER}</span> 10</span></code></pre></div>
 </details>
 </div>
             </section>

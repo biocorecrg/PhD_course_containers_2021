@@ -380,10 +380,10 @@ In order to avoid that some directories or files are inspected or included (e.g,
 
 <p>You can define a specific name for the image during the build process.</p>
 <p>Syntax: <strong><code>-t</code></strong> <em>imagename:tag</em>. If not defined <code>:tag</code> default is <strong>latest</strong>.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="docker-recipes.html#cb45-1"></a><span class="ex">docker</span> build -t mytestimage .</span>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="docker-recipes.html#cb45-1"></a><span class="ex">docker</span> build -t mytestimage_<span class="va">${USER}</span> .</span>
 <span id="cb45-2"><a href="docker-recipes.html#cb45-2"></a></span>
 <span id="cb45-3"><a href="docker-recipes.html#cb45-3"></a><span class="co"># same as:</span></span>
-<span id="cb45-4"><a href="docker-recipes.html#cb45-4"></a><span class="ex">docker</span> build -t mytestimage:latest .</span></code></pre></div>
+<span id="cb45-4"><a href="docker-recipes.html#cb45-4"></a><span class="ex">docker</span> build -t mytestimage_<span class="va">${USER}</span>:latest .</span></code></pre></div>
 <p>The last line of installation should be <strong>Successfully built …</strong>: then you are good to go.
 <br>
 Check with <code>docker images</code> that you see the newly built image in the list…</p>
@@ -463,12 +463,12 @@ ARG PyVersion=2.7
 RUN apt update &amp;&amp; apt upgrade -y
 RUN apt install -y python${PyVersion}</code></pre>
 <p>Build the image to get the default version of Python:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="docker-recipes.html#cb56-1"></a><span class="ex">docker</span> build -t py27 -f Dockerfile_ARG .</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="docker-recipes.html#cb56-1"></a><span class="ex">docker</span> build -t py27_<span class="va">${USER}</span> -f Dockerfile_ARG .</span></code></pre></div>
 <p>Build the image to install the version 3.8 of Python instead (via the <code>--build-arg</code> option):</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="docker-recipes.html#cb57-1"></a><span class="ex">docker</span> build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="docker-recipes.html#cb57-1"></a><span class="ex">docker</span> build --build-arg PyVersion=3.8 -t py38_<span class="va">${USER}</span> -f Dockerfile_ARG .</span></code></pre></div>
 <p>Run the image and check if Python of the correct version is installed:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="docker-recipes.html#cb58-1"></a><span class="ex">docker</span> run py27 python2.7 --help</span>
-<span id="cb58-2"><a href="docker-recipes.html#cb58-2"></a><span class="ex">docker</span> run py38 python3.8 --help</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="docker-recipes.html#cb58-1"></a><span class="ex">docker</span> run py27_<span class="va">${USER}</span> python2.7 --help</span>
+<span id="cb58-2"><a href="docker-recipes.html#cb58-2"></a><span class="ex">docker</span> run py38_<span class="va">${USER}</span> python3.8 --help</span></code></pre></div>
 </details>
 <p><br></p>
 <p><strong>CMD, ENTRYPOINT</strong>: command to execute when generated container starts</p>
@@ -485,11 +485,11 @@ CMD [&quot;hello world&quot;]</code></pre>
 <p>Save the above recipe in <strong>Dockerfile_hello</strong>.
 <br>
 Build:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="docker-recipes.html#cb60-1"></a><span class="ex">docker</span> build -f Dockerfile_hello -t helloimage .</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="docker-recipes.html#cb60-1"></a><span class="ex">docker</span> build -f Dockerfile_hello -t helloimage_<span class="va">${USER}</span> .</span></code></pre></div>
 <p>Run without an argument:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="docker-recipes.html#cb61-1"></a><span class="ex">docker</span> run helloimage</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="docker-recipes.html#cb61-1"></a><span class="ex">docker</span> run helloimage_<span class="va">${USER}</span></span></code></pre></div>
 <p>Now run with an argument:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="docker-recipes.html#cb62-1"></a><span class="ex">docker</span> run helloimage <span class="st">&quot;nice&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="docker-recipes.html#cb62-1"></a><span class="ex">docker</span> run helloimage_<span class="va">${USER}</span> <span class="st">&quot;nice&quot;</span></span></code></pre></div>
 <p><br></p>
 <p>Here is a more complex recipe (save it in a text file named <strong>Dockerfile_ubuntu</strong>):</p>
 <pre class="docker"><code>FROM ubuntu:18.04
@@ -537,13 +537,13 @@ RUN apt-get install -y wget
 
 ENTRYPOINT [&quot;/usr/bin/wget&quot;]
 CMD [&quot;https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png&quot;]</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="docker-recipes.html#cb68-1"></a><span class="ex">docker</span> build -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="docker-recipes.html#cb68-1"></a><span class="ex">docker</span> build -t mytestimage2_<span class="va">${USER}</span> -f Dockerfile_ubuntu .</span></code></pre></div>
 <p>It will <strong>start from the last line</strong>, and will not re-run commands before the modified line as they were already successfully built.
 <br></p>
 <p>It is very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
 <br>
 It is therefore recommended to start from scratch with <code>--no-cache</code> option, when building the image.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="docker-recipes.html#cb69-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="docker-recipes.html#cb69-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2_<span class="va">${USER}</span> -f Dockerfile_ubuntu .</span></code></pre></div>
 </div>
 </div>
             </section>

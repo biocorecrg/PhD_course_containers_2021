@@ -456,7 +456,7 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <p>You can run the container as daemon (in background), instead of the default foreground running, with the <code>--detach</code> parameter:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="using-existing-images.html#cb15-1"></a><span class="ex">docker</span> run --detach ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 <p>Run container as daemon (in background) with a given name:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="using-existing-images.html#cb16-1"></a><span class="ex">docker</span> run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="using-existing-images.html#cb16-1"></a><span class="ex">docker</span> run --detach --name myubuntu_<span class="va">${USER}</span> ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 </div>
 <div id="docker-ps-check-containers-status" class="section level3">
 <h3><span class="header-section-number">3.2.5</span> docker ps: check containers status</h3>
@@ -473,11 +473,11 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <li><code>docker run</code> creates a temporary container, runs the command and stops the container.</li>
 <li><code>docker exec</code> needs an <strong>already running container</strong> to query the command (that is, a <em>detached</em> container).</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="using-existing-images.html#cb19-1"></a><span class="ex">docker</span> exec myubuntu uname -a</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="using-existing-images.html#cb19-1"></a><span class="ex">docker</span> exec myubuntu_<span class="va">${USER}</span> uname -a</span></code></pre></div>
 <ul>
 <li>Interactively</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="using-existing-images.html#cb20-1"></a><span class="ex">docker</span> exec -it myubuntu /bin/bash</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="using-existing-images.html#cb20-1"></a><span class="ex">docker</span> exec -it myubuntu_<span class="va">${USER}</span> /bin/bash</span></code></pre></div>
 </div>
 <div id="docker-stop-start-restart-actions-on-container" class="section level3">
 <h3><span class="header-section-number">3.2.7</span> docker stop, start, restart: actions on container</h3>
@@ -486,27 +486,27 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <span id="cb21-2"><a href="using-existing-images.html#cb21-2"></a><span class="ex">docker</span> ps</span>
 <span id="cb21-3"><a href="using-existing-images.html#cb21-3"></a></span>
 <span id="cb21-4"><a href="using-existing-images.html#cb21-4"></a><span class="co"># stop the myubuntu container</span></span>
-<span id="cb21-5"><a href="using-existing-images.html#cb21-5"></a><span class="ex">docker</span> stop myubuntu</span>
+<span id="cb21-5"><a href="using-existing-images.html#cb21-5"></a><span class="ex">docker</span> stop myubuntu_<span class="va">${USER}</span></span>
 <span id="cb21-6"><a href="using-existing-images.html#cb21-6"></a></span>
 <span id="cb21-7"><a href="using-existing-images.html#cb21-7"></a><span class="co"># check the list of all containers</span></span>
 <span id="cb21-8"><a href="using-existing-images.html#cb21-8"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
 <p>Start a stopped container (does NOT create a new one):</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="using-existing-images.html#cb22-1"></a><span class="ex">docker</span> start myubuntu</span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="using-existing-images.html#cb22-1"></a><span class="ex">docker</span> start myubuntu_<span class="va">${USER}</span></span>
 <span id="cb22-2"><a href="using-existing-images.html#cb22-2"></a></span>
 <span id="cb22-3"><a href="using-existing-images.html#cb22-3"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
 <p>Restart a running container:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="using-existing-images.html#cb23-1"></a><span class="ex">docker</span> restart myubuntu</span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="using-existing-images.html#cb23-1"></a><span class="ex">docker</span> restart myubuntu_<span class="va">${USER}</span></span>
 <span id="cb23-2"><a href="using-existing-images.html#cb23-2"></a></span>
 <span id="cb23-3"><a href="using-existing-images.html#cb23-3"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
 <p>Run with restart is enabled (by default, when exits, Docker does not automatically restart the container).
 <br>
 In the example below, we start a <strong>detached container named “myubuntu2”</strong> with the <strong>unless-stopped</strong> restart policy: <em>restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.</em></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="using-existing-images.html#cb24-1"></a><span class="ex">docker</span> run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="using-existing-images.html#cb24-1"></a><span class="ex">docker</span> run --restart=unless-stopped --detach --name myubuntu2_<span class="va">${USER}</span> ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 <ul>
 <li><a href="https://docs.docker.com/engine/reference/commandline/run/#restart-policies---restart">Restart policies</a>: no (default), always, on-failure, unless-stopped</li>
 </ul>
 <p>Update restart policy:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="using-existing-images.html#cb25-1"></a><span class="ex">docker</span> update --restart unless-stopped myubuntu</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="using-existing-images.html#cb25-1"></a><span class="ex">docker</span> update --restart unless-stopped myubuntu_<span class="va">${USER}</span></span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
@@ -529,17 +529,17 @@ In the example below, we start a <strong>detached container named “myubuntu2�
 </h5>
 <p></summary></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="using-existing-images.html#cb26-1"></a><span class="co"># start a &quot;detached&quot; container (in the background)</span></span>
-<span id="cb26-2"><a href="using-existing-images.html#cb26-2"></a><span class="ex">docker</span> run --detach --name helloworld1 hello-world</span>
+<span id="cb26-2"><a href="using-existing-images.html#cb26-2"></a><span class="ex">docker</span> run --detach --name helloworld1_<span class="va">${USER}</span> hello-world</span>
 <span id="cb26-3"><a href="using-existing-images.html#cb26-3"></a></span>
 <span id="cb26-4"><a href="using-existing-images.html#cb26-4"></a><span class="co"># start a &quot;detached&quot; container with the &quot;--restart=always&quot; option</span></span>
-<span id="cb26-5"><a href="using-existing-images.html#cb26-5"></a><span class="ex">docker</span> run --detach --restart=always --name helloworld2 hello-world</span></code></pre></div>
+<span id="cb26-5"><a href="using-existing-images.html#cb26-5"></a><span class="ex">docker</span> run --detach --restart=always --name helloworld2_<span class="va">${USER}</span> hello-world</span></code></pre></div>
 </details>
 </div>
 <div id="docker-rm-docker-rmi-clean-up" class="section level3">
 <h3><span class="header-section-number">3.2.8</span> docker rm, docker rmi: clean up!</h3>
 <p><code>docker rm</code> is used to remove a <strong>container</strong> (set <code>-f</code> is the container is running, to force the removal):</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="using-existing-images.html#cb27-1"></a><span class="ex">docker</span> rm myubuntu</span>
-<span id="cb27-2"><a href="using-existing-images.html#cb27-2"></a><span class="ex">docker</span> rm -f myubuntu</span></code></pre></div>
+<span id="cb27-2"><a href="using-existing-images.html#cb27-2"></a><span class="ex">docker</span> rm -f myubuntu_<span class="va">${USER}</span></span></code></pre></div>
 <p><code>docker rmi</code> is used to remove an <strong>image</strong>:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="using-existing-images.html#cb28-1"></a><span class="ex">docker</span> rmi ubuntu:18.04</span></code></pre></div>
 <center>

@@ -279,10 +279,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </h5>
 <p></summary></p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb79-1"><a href="additional-commands.html#cb79-1"></a><span class="co"># Let&#39;s save the image in a tar</span></span>
-<span id="cb79-2"><a href="additional-commands.html#cb79-2"></a><span class="ex">docker</span> save -o random_numbers.tar random_numbers</span>
+<span id="cb79-2"><a href="additional-commands.html#cb79-2"></a><span class="ex">docker</span> save -o random_numbers.tar random_numbers_<span class="va">${USER}</span></span>
 <span id="cb79-3"><a href="additional-commands.html#cb79-3"></a></span>
 <span id="cb79-4"><a href="additional-commands.html#cb79-4"></a><span class="co"># Remove the original image</span></span>
-<span id="cb79-5"><a href="additional-commands.html#cb79-5"></a><span class="ex">docker</span> rmi random_numbers</span>
+<span id="cb79-5"><a href="additional-commands.html#cb79-5"></a><span class="ex">docker</span> rmi random_numbers_<span class="va">${USER}</span></span>
 <span id="cb79-6"><a href="additional-commands.html#cb79-6"></a></span>
 <span id="cb79-7"><a href="additional-commands.html#cb79-7"></a><span class="co"># Check existing images now</span></span>
 <span id="cb79-8"><a href="additional-commands.html#cb79-8"></a><span class="ex">docker</span> images</span>
