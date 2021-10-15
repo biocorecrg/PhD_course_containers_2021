@@ -322,7 +322,7 @@ docker run --detach ubuntu:18.04 tail -f /dev/null
 Run container as daemon (in background) with a given name:
 
 ```{bash}
-docker run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null
+docker run --detach --name myubuntu_${USER} ubuntu:18.04 tail -f /dev/null
 ```
 
 ### docker ps: check containers status
@@ -350,13 +350,13 @@ Difference between `docker run` and `docker exec`:
 * `docker exec` needs an **already running container** to query the command (that is, a *detached* container).
 
 ```{bash}
-docker exec myubuntu uname -a
+docker exec myubuntu_${USER} uname -a
 ```
 
 * Interactively
 
 ```{bash}
-docker exec -it myubuntu /bin/bash
+docker exec -it myubuntu_${USER} /bin/bash
 ```
 
 
@@ -369,7 +369,7 @@ Stop a running container with `docker stop`.
 docker ps
 
 # stop the myubuntu container
-docker stop myubuntu
+docker stop myubuntu_${USER}
 
 # check the list of all containers
 docker ps -a
@@ -378,7 +378,7 @@ docker ps -a
 Start a stopped container (does NOT create a new one):
 
 ```{bash}
-docker start myubuntu
+docker start myubuntu_${USER}
 
 docker ps -a
 ```
@@ -386,7 +386,7 @@ docker ps -a
 Restart a running container:
 
 ```{bash}
-docker restart myubuntu
+docker restart myubuntu_${USER}
 
 docker ps -a
 ```
@@ -396,7 +396,7 @@ Run with restart is enabled (by default, when exits, Docker does not automatical
 In the example below, we start a **detached container named "myubuntu2"** with the **unless-stopped** restart policy: *restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.*
 
 ```{bash}
-docker run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail -f /dev/null
+docker run --restart=unless-stopped --detach --name myubuntu2_${USER} ubuntu:18.04 tail -f /dev/null
 ```
 
 * [Restart policies](https://docs.docker.com/engine/reference/commandline/run/#restart-policies---restart): no (default), always, on-failure, unless-stopped
@@ -404,7 +404,7 @@ docker run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail 
 Update restart policy:
 
 ```{bash}
-docker update --restart unless-stopped myubuntu
+docker update --restart unless-stopped myubuntu_${USER}
 ```
 
 
@@ -422,10 +422,10 @@ docker update --restart unless-stopped myubuntu
 
 ```{bash}
 # start a "detached" container (in the background)
-docker run --detach --name helloworld1 hello-world
+docker run --detach --name helloworld1_${USER} hello-world
 
 # start a "detached" container with the "--restart=always" option
-docker run --detach --restart=always --name helloworld2 hello-world
+docker run --detach --restart=always --name helloworld2_${USER} hello-world
 ```
 
 </details>
@@ -437,7 +437,7 @@ docker run --detach --restart=always --name helloworld2 hello-world
 
 ```{bash}
 docker rm myubuntu
-docker rm -f myubuntu
+docker rm -f myubuntu_${USER}
 ```
 
 `docker rmi` is used to remove an **image**:
@@ -518,7 +518,7 @@ In breakout rooms, do the following exercise:
 ```{bash}
 # Search and pull the alpine image (tag 3.12) - it is an official build.
 docker search alpine --filter is-official=true
-docker pull  alpine:3.12
+docker pull alpine:3.12
 
 # Can you run a container from this image and make it print a “hello world” message?
 docker run alpine:3.12 echo "hello world"
@@ -771,10 +771,10 @@ You can define a specific name for the image during the build process.
 Syntax: **`-t`** *imagename:tag*. If not defined `:tag` default is **latest**.
 
 ```{bash}
-docker build -t mytestimage .
+docker build -t mytestimage_${USER} .
 
 # same as:
-docker build -t mytestimage:latest .
+docker build -t mytestimage_${USER}:latest .
 ```
 
 The last line of installation should be **Successfully built ...**: then you are good to go.
@@ -902,20 +902,20 @@ RUN apt install -y python${PyVersion}
 Build the image to get the default version of Python:
 
 ```{bash}
-docker build -t py27 -f Dockerfile_ARG .
+docker build -t py27_${USER} -f Dockerfile_ARG .
 ```
 
 Build the image to install the version 3.8 of Python instead (via the `--build-arg` option):
 
 ```{bash}
-docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .
+docker build --build-arg PyVersion=3.8 -t py38_${USER} -f Dockerfile_ARG .
 ```
 
 Run the image and check if Python of the correct version is installed:
 
 ```{bash}
-docker run py27 python2.7 --help
-docker run py38 python3.8 --help
+docker run py27_${USER} python2.7 --help
+docker run py38_${USER} python3.8 --help
 ```
 
 </details>
@@ -948,19 +948,19 @@ Save the above recipe in **Dockerfile_hello**.
 Build:
 
 ```{bash}
-docker build -f Dockerfile_hello -t helloimage .
+docker build -f Dockerfile_hello -t helloimage_${USER} .
 ```
 
 Run without an argument:
 
 ```{bash}
-docker run helloimage
+docker run helloimage_${USER}
 ```
 
 Now run with an argument:
 
 ```{bash}
-docker run helloimage "nice"
+docker run helloimage_${USER} "nice"
 ```
 
 <br>
@@ -1033,7 +1033,7 @@ CMD ["https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png"]
 ```
 
 ```{bash}
-docker build -t mytestimage2 -f Dockerfile_ubuntu .
+docker build -t mytestimage2_${USER} -f Dockerfile_ubuntu .
 ```
 
 It will **start from the last line**, and will not re-run commands before the modified line as they were already successfully built.
@@ -1044,7 +1044,7 @@ It is very convenient for testing and trying new steps, but it may lead to error
 It is therefore recommended to start from scratch with `--no-cache` option, when building the image.
 
 ```{bash}
-docker build --no-cache -t mytestimage2 -f Dockerfile_ubuntu .
+docker build --no-cache -t mytestimage2_${USER} -f Dockerfile_ubuntu .
 ```
 
 ## Exercise 2 - Docker recipes and build images
@@ -1084,17 +1084,17 @@ CMD ["I love containers"]
 Build:
 
 ```{bash}
-docker build --file Dockerfile_figlet -t mytest .
+docker build --file Dockerfile_figlet -t mytest_${USER} .
 ```
 
 Run the image:
 
 ```{bash}
 # with no argument
-docker run mytest
+docker run mytest_${USER}
 
 # with argument "Docker course"
-docker run mytest "Docker course"
+docker run mytest_${USER} "Docker course"
 ```
 
 Recipe:
@@ -1114,17 +1114,17 @@ CMD ["I love containers"]
 Build the image.
 
 ```{bash}
-docker build --no-cache --file Dockerfile_figlet -t mytestfiglet .
+docker build --no-cache --file Dockerfile_figlet -t mytestfiglet_${USER} .
 ```
 
 Run the new image, with the default parameter, then with **"Docker course"** as an argument.
 
 ```{bash}
 # run with no argument
-docker run mytestfiglet
+docker run mytestfiglet_${USER}
 
 # run with argument "Docker course"
-docker run mytestfiglet "Docker course"
+docker run mytestfiglet_${USER} "Docker course"
 ```
 
 </details>
@@ -1174,9 +1174,9 @@ CMD ["2"]
 Build and run:
 
 ```{bash}
-docker build -f Dockerfile_RN -t random_numbers .
-docker run random_numbers
-docker run random_numbers 10
+docker build -f Dockerfile_RN -t random_numbers_${USER} .
+docker run random_numbers_${USER}
+docker run random_numbers_${USER} 10
 ```
 
 </details>
@@ -1212,10 +1212,10 @@ Good for long-term reproducibility and for critical production environments:
 
 ```{bash}
 # Let's save the image in a tar
-docker save -o random_numbers.tar random_numbers
+docker save -o random_numbers.tar random_numbers_${USER}
 
 # Remove the original image
-docker rmi random_numbers
+docker rmi random_numbers_${USER}
 
 # Check existing images now
 docker images
@@ -1255,7 +1255,7 @@ mkdir datatest
 touch datatest/test
 
 # Run a container in the background (--detach) and mount the local volume "datatest" (we map it to directory /scratch inside the container)
-docker run --detach --volume $(pwd)/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null
+docker run --detach --volume $(pwd)/datatest:/scratch --name fastqc_container_${USER} biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null
 
 # Execute the container interactively
 docker exec -ti fastqc_container /bin/bash
@@ -1287,18 +1287,18 @@ wget -O - https://github.com/biocorecrg/PhD_course_containers_2021/blob/main/tes
 wget -O - https://github.com/biocorecrg/PhD_course_containers_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true > datatest/B7_input_s_chr19.fastq.gz
 
 # Mount volumes and start a detached container
-docker run --detach -ti --volume $(pwd)/datatest:/scratch --name fastqc_container_test biocontainers/fastqc:v0.11.9_cv7
+docker run --detach -ti --volume $(pwd)/datatest:/scratch --name fastqc_container_test_${USER} biocontainers/fastqc:v0.11.9_cv7
 
 # Execute container interactively and run fastqc
-docker exec -ti fastqc_container_test /bin/bash
+docker exec -ti fastqc_container_test_${USER} /bin/bash
 > fastqc /scratch/*.gz
 
 # Run fastqc outside the container
 # One by one
-docker exec fastqc_container_test fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz
-docker exec fastqc_container_test fastqc /scratch/B7_input_s_chr19.fastq.gz
+docker exec fastqc_container_test_${USER} fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz
+docker exec fastqc_container_test_${USER} fastqc /scratch/B7_input_s_chr19.fastq.gz
 # All (using wildcard *)
-docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
+docker exec fastqc_container_test_${USER} bash -c 'ls /scratch/*gz'
 
 ```
 
@@ -1320,22 +1320,22 @@ docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
 </summary>
 ```{bash}
 # Let's create the container and we dettach it
-docker run --detach -ti --volume $(pwd)/datatest:/scratch --name blastp_test ncbi/blast:2.10.1
+docker run --detach -ti --volume $(pwd)/datatest:/scratch --name blastp_test_${USER} ncbi/blast:2.10.1
 
 # Execute container interactively and run blastp
 docker exec -ti blastp_test /bin/bash
 > blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > /scratch/insideout.txt
 
 # Run from outside and retrieve in different ways
-docker exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta
+docker exec -ti blastp_test_${USER} blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta
 
-docker exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > out.txt
+docker exec -ti blastp_test_${USER} blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > out.txt
 
-docker exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain.txt
+docker exec -ti blastp_test_${USER} blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain.txt
 
-docker run --volume $(pwd)/datatest:/scratch --name blastp1 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > out2.txt
+docker run --volume $(pwd)/datatest:/scratch --name blastp1_${USER} ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > out2.txt
 
-docker run --volume $(pwd)/datatest:/scratch --name blastp2 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain2.txt
+docker run --volume $(pwd)/datatest:/scratch --name blastp2_${USER} ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain2.txt
 
 ```
 </details>
@@ -1351,33 +1351,33 @@ In the example below we use NGINX, a popular web server that, by default, expose
 
 ```{bash}
 # We start the web server in the background
-docker run --detach --name webserver nginx
+docker run --detach --name webserver_${USER} nginx
 
 # We test with curl if port 80 is available from our host machine
 curl localhost:80
 
 # We then check inside the container
-docker exec webserver curl localhost:80
+docker exec webserver_${USER} curl localhost:80
 
 # We remove the container
-docker rm -f webserver
+docker rm -f webserver_${USER}
 
 ```
 
 ```{bash}
 # We start the web server in the background. We use **publish** to map the ports from the container to the host
-docker run --detach --name webserver --publish 80:80 nginx
+docker run --detach --name webserver_${USER} --publish 80:80 nginx
 
 # We test if port 80 is available from our host machine
 curl localhost:80
 
 # We remove the container
-docker rm -f webserver
+docker rm -f webserver_${USER}
 ```
 
 ```{bash}
 # We start the web server in the background. We use **publish** to map the ports from the container to the host. Now instead of mapping to 80 in the host, we map to another one (3838 for instance).
-docker run --detach --name webserver -p 3838:80 nginx
+docker run --detach --name webserver_${USER} -p 3838:80 nginx
 
 # We test if port 80 is available from our host machine
 curl localhost:80
@@ -1386,11 +1386,11 @@ curl localhost:80
 curl localhost:3838
 
 # We repeat the check, but now inside the container
-docker exec webserver curl localhost:80
-docker exec webserver curl localhost:3838
+docker exec webserver_${USER} curl localhost:80
+docker exec webserver_${USER} curl localhost:3838
 
 # We remove the container
-docker rm -f webserver
+docker rm -f webserver_${USER}
 ```
 
 ```{block2, type='rdmtip'}
@@ -1413,9 +1413,9 @@ cp testdata/* $HOME/myscratch
 
 cd containers/docker/fastqc_www
 
-docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
+docker build -t fastqcwww_${USER} -f Dockerfile ../../scripts/fastqc
 
-docker run -d -v $HOME/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww
+docker run -d -v $HOME/myscratch:/scratch -p 3838:8083 --name myfastqc_${USER} fastqcwww_${USER}
 ```
 
 Example query from the browser:
@@ -1435,9 +1435,9 @@ Replace your mymachine-address-here for machine provided address or 127.0.0.1/lo
 ```{bash}
 cd containers/docker/shiny
 
-docker build -t shinyapp -f Dockerfile ../../scripts
+docker build -t shinyapp_${USER} -f Dockerfile ../../scripts
 
-docker run -d -v $(pwd)/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp
+docker run -d -v $(pwd)/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver_${USER} shinyapp_${USER}
 ```
 
 Check the result from the browser
@@ -1567,7 +1567,7 @@ ENTRYPOINT ["php", "-S", "0.0.0.0:8081"]
 ```
 
 ```{bash}
-docker run -d -v $HOME/db:/blastdb -p 80:8081 --name myblast blastwww
+docker run -d -v $HOME/db:/blastdb -p 80:8081 --name myblast_${USER} blastwww_${USER}
 ```
 
 
