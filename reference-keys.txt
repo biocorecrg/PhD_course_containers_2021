@@ -72,7 +72,6 @@ docker-daemon
 sandboxing
 singularity-recipes
 docker-bootstrap
-debian-bootstrap
 run-and-execution-process
 singularity-shell
 singularity-exec
