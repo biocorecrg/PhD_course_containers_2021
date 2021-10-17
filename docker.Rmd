@@ -1368,16 +1368,6 @@ docker rm -f webserver_${USER}
 
 ```
 
-```{bash}
-# We start the web server in the background. We use **publish** to map the ports from the container to the host
-docker run --detach --name webserver_${USER} --publish 80:80 nginx
-
-# We test if port 80 is available from our host machine
-curl localhost:80
-
-# We remove the container
-docker rm -f webserver_${USER}
-```
 
 ```{bash}
 # We start the web server in the background. We use **publish** to map the ports from the container to the host. Now instead of mapping to 80 in the host, we map to another one (3838 for instance).
@@ -1398,7 +1388,7 @@ docker rm -f webserver_${USER}
 ```
 
 ```{block2, type='rdmtip'}
-You can check the website also from your web browser at: http://mymachine-address-here/ (port 80 by default). Replace your mymachine-address-here for machine provided address or 127.0.0.1/localhost in case you were trying it from your own machine.
+Modify 3838 port with any other port that may not be conflicting.
 ```
 
 
@@ -1430,10 +1420,6 @@ http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq
 As commented in previous sections, the context is the place from where Docker will start the build process. Keep it in mind when defining the paths when using commands such as **COPY** in the recipe.
 ```
 
-```{block2, type='rmdnote'}
-Replace your mymachine-address-here for machine provided address or 127.0.0.1/localhost in case you were trying it from your own machine.
-```
-
 ### Shiny Application
 
 ```{bash}
@@ -1443,10 +1429,6 @@ docker build -t shinyapp_${USER} -f Dockerfile ../../scripts
 
 docker run -d -v $(pwd)/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver_${USER} shinyapp_${USER}
 ```
-
-Check the result from the browser
-http://mymachine-address-here:3838
-
 
 ```{block2, type='rmdnote'}
 In the CMD execution you see the host *0.0.0.0*, this a normal approach to indicate association to any IP address from the machine you launch the program. In a very machine you can have many routings and networks associated (e.g., more than one Ethernet plug)
@@ -1571,7 +1553,7 @@ ENTRYPOINT ["php", "-S", "0.0.0.0:8081"]
 ```
 
 ```{bash}
-docker run -d -v $HOME/db:/blastdb -p 80:8081 --name myblast_${USER} blastwww_${USER}
+docker run -d -v $HOME/db:/blastdb -p 8090:8081 --name myblast_${USER} blastwww_${USER}
 ```
 
 
