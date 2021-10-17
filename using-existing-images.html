@@ -457,6 +457,11 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="using-existing-images.html#cb15-1"></a><span class="ex">docker</span> run --detach ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 <p>Run container as daemon (in background) with a given name:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="using-existing-images.html#cb16-1"></a><span class="ex">docker</span> run --detach --name myubuntu_<span class="va">${USER}</span> ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+
+<div class="rmdnote">
+Since we are sharing the same machine and this would lead to clashes among different users of the course, we are going to append the environment variable ${USER} when we name images and containers.
+</div>
+
 </div>
 <div id="docker-ps-check-containers-status" class="section level3">
 <h3><span class="header-section-number">3.2.5</span> docker ps: check containers status</h3>
