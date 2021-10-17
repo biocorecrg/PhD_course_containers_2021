@@ -43,7 +43,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 * At the time of writing only good support in Linux
   * Mac experimental. Desktop edition. Only running
-* For some features you need root account (or sudo)
+* For some features you need root account (or sudo) - alternatively using fakeroot option
 
 
 ## Warning
@@ -155,6 +155,10 @@ From: biocontainers/fastqc:v0.11.9_cv7
 ```{block2, type='rmdtip'}
 The command %runscript would be equivalent to ENTRYPOINT/CMD in Docker. It is only triggered when using ```singularity run```. This is useful if you want to hide from the user the complexity of a command-line path or an included custom script.
 ```
+```{block2, type='rmdnote'}
+There are other bootstraping options, such as debootstrap: https://wiki.debian.org/singularity
+```
+
 ```{block2, type='rmdnote'}
 It's possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: https://singularity.hpcng.org/user-docs/3.7/signNverify.html
 ```
