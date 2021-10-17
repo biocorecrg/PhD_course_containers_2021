@@ -263,9 +263,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></summary>
 Compare with the previous Docker examples</p>
 <p>First of all, let’s generate a <code>blast.sif</code> image. We have plenty of ways to do this. One example below:</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb114-1"><a href="exercise-4---singularity-running-and-building.html#cb114-1"></a><span class="ex">singularity</span> build blast.sif docker://ncbi/blast:2.10.1</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb113-1"><a href="exercise-4---singularity-running-and-building.html#cb113-1"></a><span class="ex">singularity</span> build blast.sif docker://ncbi/blast:2.10.1</span></code></pre></div>
 <div id="blast-command-line-1" class="section level3">
 <h3><span class="header-section-number">4.9.1</span> Blast command-line (1)</h3>
+<div class="sourceCode" id="cb114"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb114-1"><a href="exercise-4---singularity-running-and-building.html#cb114-1"></a><span class="co"># If not there create a DB dir</span></span>
+<span id="cb114-2"><a href="exercise-4---singularity-running-and-building.html#cb114-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/db</span>
+<span id="cb114-3"><a href="exercise-4---singularity-running-and-building.html#cb114-3"></a></span>
+<span id="cb114-4"><a href="exercise-4---singularity-running-and-building.html#cb114-4"></a><span class="fu">cp</span> blast.sif <span class="va">$HOME</span>/db</span>
+<span id="cb114-5"><a href="exercise-4---singularity-running-and-building.html#cb114-5"></a></span>
+<span id="cb114-6"><a href="exercise-4---singularity-running-and-building.html#cb114-6"></a><span class="bu">cd</span> <span class="va">$HOME</span>/db</span>
+<span id="cb114-7"><a href="exercise-4---singularity-running-and-building.html#cb114-7"></a></span>
+<span id="cb114-8"><a href="exercise-4---singularity-running-and-building.html#cb114-8"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta</span>
+<span id="cb114-9"><a href="exercise-4---singularity-running-and-building.html#cb114-9"></a></span>
+<span id="cb114-10"><a href="exercise-4---singularity-running-and-building.html#cb114-10"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta</span>
+<span id="cb114-11"><a href="exercise-4---singularity-running-and-building.html#cb114-11"></a></span>
+<span id="cb114-12"><a href="exercise-4---singularity-running-and-building.html#cb114-12"></a><span class="ex">singularity</span> exec blast.sif blastp -query O75976.fasta -subject Q90240.fasta</span>
+<span id="cb114-13"><a href="exercise-4---singularity-running-and-building.html#cb114-13"></a></span>
+<span id="cb114-14"><a href="exercise-4---singularity-running-and-building.html#cb114-14"></a><span class="co"># We can mount if we prefer (as we did with Docker), but it&#39;s not strictly necessary</span></span>
+<span id="cb114-15"><a href="exercise-4---singularity-running-and-building.html#cb114-15"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta <span class="op">&gt;</span> out.blast</span>
+<span id="cb114-16"><a href="exercise-4---singularity-running-and-building.html#cb114-16"></a></span>
+<span id="cb114-17"><a href="exercise-4---singularity-running-and-building.html#cb114-17"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast</span></code></pre></div>
+</div>
+<div id="blast-command-line-2" class="section level3">
+<h3><span class="header-section-number">4.9.2</span> Blast command-line (2)</h3>
 <div class="sourceCode" id="cb115"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb115-1"><a href="exercise-4---singularity-running-and-building.html#cb115-1"></a><span class="co"># If not there create a DB dir</span></span>
 <span id="cb115-2"><a href="exercise-4---singularity-running-and-building.html#cb115-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/db</span>
 <span id="cb115-3"><a href="exercise-4---singularity-running-and-building.html#cb115-3"></a></span>
@@ -273,35 +293,15 @@ Compare with the previous Docker examples</p>
 <span id="cb115-5"><a href="exercise-4---singularity-running-and-building.html#cb115-5"></a></span>
 <span id="cb115-6"><a href="exercise-4---singularity-running-and-building.html#cb115-6"></a><span class="bu">cd</span> <span class="va">$HOME</span>/db</span>
 <span id="cb115-7"><a href="exercise-4---singularity-running-and-building.html#cb115-7"></a></span>
-<span id="cb115-8"><a href="exercise-4---singularity-running-and-building.html#cb115-8"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta</span>
-<span id="cb115-9"><a href="exercise-4---singularity-running-and-building.html#cb115-9"></a></span>
-<span id="cb115-10"><a href="exercise-4---singularity-running-and-building.html#cb115-10"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta</span>
-<span id="cb115-11"><a href="exercise-4---singularity-running-and-building.html#cb115-11"></a></span>
-<span id="cb115-12"><a href="exercise-4---singularity-running-and-building.html#cb115-12"></a><span class="ex">singularity</span> exec blast.sif blastp -query O75976.fasta -subject Q90240.fasta</span>
-<span id="cb115-13"><a href="exercise-4---singularity-running-and-building.html#cb115-13"></a></span>
-<span id="cb115-14"><a href="exercise-4---singularity-running-and-building.html#cb115-14"></a><span class="co"># We can mount if we prefer (as we did with Docker), but it&#39;s not strictly necessary</span></span>
-<span id="cb115-15"><a href="exercise-4---singularity-running-and-building.html#cb115-15"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta <span class="op">&gt;</span> out.blast</span>
-<span id="cb115-16"><a href="exercise-4---singularity-running-and-building.html#cb115-16"></a></span>
-<span id="cb115-17"><a href="exercise-4---singularity-running-and-building.html#cb115-17"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast</span></code></pre></div>
-</div>
-<div id="blast-command-line-2" class="section level3">
-<h3><span class="header-section-number">4.9.2</span> Blast command-line (2)</h3>
-<div class="sourceCode" id="cb116"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb116-1"><a href="exercise-4---singularity-running-and-building.html#cb116-1"></a><span class="co"># If not there create a DB dir</span></span>
-<span id="cb116-2"><a href="exercise-4---singularity-running-and-building.html#cb116-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/db</span>
-<span id="cb116-3"><a href="exercise-4---singularity-running-and-building.html#cb116-3"></a></span>
-<span id="cb116-4"><a href="exercise-4---singularity-running-and-building.html#cb116-4"></a><span class="fu">cp</span> blast.sif <span class="va">$HOME</span>/db</span>
-<span id="cb116-5"><a href="exercise-4---singularity-running-and-building.html#cb116-5"></a></span>
-<span id="cb116-6"><a href="exercise-4---singularity-running-and-building.html#cb116-6"></a><span class="bu">cd</span> <span class="va">$HOME</span>/db</span>
-<span id="cb116-7"><a href="exercise-4---singularity-running-and-building.html#cb116-7"></a></span>
-<span id="cb116-8"><a href="exercise-4---singularity-running-and-building.html#cb116-8"></a><span class="co"># Let&#39;s download Swissprot DB</span></span>
-<span id="cb116-9"><a href="exercise-4---singularity-running-and-building.html#cb116-9"></a><span class="ex">curl</span> -L https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz</span>
-<span id="cb116-10"><a href="exercise-4---singularity-running-and-building.html#cb116-10"></a></span>
-<span id="cb116-11"><a href="exercise-4---singularity-running-and-building.html#cb116-11"></a><span class="fu">gunzip</span> swissprot.gz</span>
-<span id="cb116-12"><a href="exercise-4---singularity-running-and-building.html#cb116-12"></a></span>
-<span id="cb116-13"><a href="exercise-4---singularity-running-and-building.html#cb116-13"></a><span class="co"># Let format the Swissprot DB</span></span>
-<span id="cb116-14"><a href="exercise-4---singularity-running-and-building.html#cb116-14"></a><span class="ex">singularity</span> exec blast.sif makeblastdb -dbtype prot -parse_seqids -in swissprot</span></code></pre></div>
+<span id="cb115-8"><a href="exercise-4---singularity-running-and-building.html#cb115-8"></a><span class="co"># Let&#39;s download Swissprot DB</span></span>
+<span id="cb115-9"><a href="exercise-4---singularity-running-and-building.html#cb115-9"></a><span class="ex">curl</span> -L https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz</span>
+<span id="cb115-10"><a href="exercise-4---singularity-running-and-building.html#cb115-10"></a></span>
+<span id="cb115-11"><a href="exercise-4---singularity-running-and-building.html#cb115-11"></a><span class="fu">gunzip</span> swissprot.gz</span>
+<span id="cb115-12"><a href="exercise-4---singularity-running-and-building.html#cb115-12"></a></span>
+<span id="cb115-13"><a href="exercise-4---singularity-running-and-building.html#cb115-13"></a><span class="co"># Let format the Swissprot DB</span></span>
+<span id="cb115-14"><a href="exercise-4---singularity-running-and-building.html#cb115-14"></a><span class="ex">singularity</span> exec blast.sif makeblastdb -dbtype prot -parse_seqids -in swissprot</span></code></pre></div>
 <p>We can retrieve a FASTA sequence by ID</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb117-1"><a href="exercise-4---singularity-running-and-building.html#cb117-1"></a><span class="ex">singularity</span> exec blast.sif blastdbcmd -dbtype prot -db swissprot -entry O75976</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb116-1"><a href="exercise-4---singularity-running-and-building.html#cb116-1"></a><span class="ex">singularity</span> exec blast.sif blastdbcmd -dbtype prot -db swissprot -entry O75976</span></code></pre></div>
 </details>
 
 </div>

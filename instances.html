@@ -259,21 +259,21 @@ From: library/mariadb:10.3
 
 %startscript
         mysqld</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb111-1"><a href="instances.html#cb111-1"></a>    <span class="fu">sudo</span> singularity build mariadb.sif mariadb.singularity</span>
-<span id="cb111-2"><a href="instances.html#cb111-2"></a></span>
-<span id="cb111-3"><a href="instances.html#cb111-3"></a>    <span class="fu">mkdir</span> -p testdir</span>
-<span id="cb111-4"><a href="instances.html#cb111-4"></a>    <span class="fu">mkdir</span> -p testdir/db</span>
-<span id="cb111-5"><a href="instances.html#cb111-5"></a>    <span class="fu">mkdir</span> -p testdir/socket</span>
-<span id="cb111-6"><a href="instances.html#cb111-6"></a></span>
-<span id="cb111-7"><a href="instances.html#cb111-7"></a>    <span class="ex">singularity</span> exec -B ./testdir/db:/var/lib/mysql mariadb.sif mysql_install_db</span>
-<span id="cb111-8"><a href="instances.html#cb111-8"></a></span>
-<span id="cb111-9"><a href="instances.html#cb111-9"></a>    <span class="ex">singularity</span> instance start -B ./testdir/db:/var/lib/mysql -B ./testdir/socket:/run/mysqld mariadb.sif mydb</span>
-<span id="cb111-10"><a href="instances.html#cb111-10"></a></span>
-<span id="cb111-11"><a href="instances.html#cb111-11"></a>    <span class="ex">singularity</span> instance list</span>
-<span id="cb111-12"><a href="instances.html#cb111-12"></a></span>
-<span id="cb111-13"><a href="instances.html#cb111-13"></a>    <span class="ex">singularity</span> exec instance://mydb mysql -uroot</span>
-<span id="cb111-14"><a href="instances.html#cb111-14"></a></span>
-<span id="cb111-15"><a href="instances.html#cb111-15"></a>    <span class="ex">singularity</span> instance stop mydb</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb110-1"><a href="instances.html#cb110-1"></a>    <span class="fu">sudo</span> singularity build mariadb.sif mariadb.singularity</span>
+<span id="cb110-2"><a href="instances.html#cb110-2"></a></span>
+<span id="cb110-3"><a href="instances.html#cb110-3"></a>    <span class="fu">mkdir</span> -p testdir</span>
+<span id="cb110-4"><a href="instances.html#cb110-4"></a>    <span class="fu">mkdir</span> -p testdir/db</span>
+<span id="cb110-5"><a href="instances.html#cb110-5"></a>    <span class="fu">mkdir</span> -p testdir/socket</span>
+<span id="cb110-6"><a href="instances.html#cb110-6"></a></span>
+<span id="cb110-7"><a href="instances.html#cb110-7"></a>    <span class="ex">singularity</span> exec -B ./testdir/db:/var/lib/mysql mariadb.sif mysql_install_db</span>
+<span id="cb110-8"><a href="instances.html#cb110-8"></a></span>
+<span id="cb110-9"><a href="instances.html#cb110-9"></a>    <span class="ex">singularity</span> instance start -B ./testdir/db:/var/lib/mysql -B ./testdir/socket:/run/mysqld mariadb.sif mydb</span>
+<span id="cb110-10"><a href="instances.html#cb110-10"></a></span>
+<span id="cb110-11"><a href="instances.html#cb110-11"></a>    <span class="ex">singularity</span> instance list</span>
+<span id="cb110-12"><a href="instances.html#cb110-12"></a></span>
+<span id="cb110-13"><a href="instances.html#cb110-13"></a>    <span class="ex">singularity</span> exec instance://mydb mysql -uroot</span>
+<span id="cb110-14"><a href="instances.html#cb110-14"></a></span>
+<span id="cb110-15"><a href="instances.html#cb110-15"></a>    <span class="ex">singularity</span> instance stop mydb</span></code></pre></div>
 
 <div class="rmdnote">
 When exposing ports below 1024 in a LINUX machine, administrator (sudo) privileges are needed. Historical reference: <a href="https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html" class="uri">https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html</a>
