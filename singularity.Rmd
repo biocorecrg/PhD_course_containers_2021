@@ -46,14 +46,21 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 * For some features you need root account (or sudo) - alternatively using fakeroot option
 
 
-## Warning
+## Trivia
 
-There may be some confusion since there are two projects which the share the same name:
+Nowadays, there may be some confusion since there are two projects which the share the same name:
 
 * [HPCng Singularity](https://singularity.hpcng.org/)
 * [Sylabs Singularity](https://sylabs.io/singularity/)
 
 They "forked" not long ago. So far they share most of the codebase, but eventually this may different and software could have different functionality.
+
+```{block2, type='rmdnote'}
+At the CRG HPC system there are several Singularity versions than can be accessed using modules.
+To check available Singularity versions, type: module avail Singularity
+Then you can load one using: module load Singularity/x.y.z
+```
+
 
 ## Build process
 
@@ -155,6 +162,7 @@ From: biocontainers/fastqc:v0.11.9_cv7
 ```{block2, type='rmdtip'}
 The command %runscript would be equivalent to ENTRYPOINT/CMD in Docker. It is only triggered when using ```singularity run```. This is useful if you want to hide from the user the complexity of a command-line path or an included custom script.
 ```
+
 ```{block2, type='rmdnote'}
 There are other bootstraping options, such as debootstrap: https://wiki.debian.org/singularity
 ```
