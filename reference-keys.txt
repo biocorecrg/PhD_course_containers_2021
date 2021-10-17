@@ -59,7 +59,7 @@ introduction-to-singularity
 singularity-architecture
 strengths
 weaknesses
-warning
+trivia
 build-process
 examples
 through-registries
