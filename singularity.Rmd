@@ -56,7 +56,7 @@ Nowadays, there may be some confusion since there are two projects which the sha
 They "forked" not long ago. So far they share most of the codebase, but eventually this may different and software could have different functionality.
 
 ```{block2, type='rmdnote'}
-At the CRG HPC system there are several Singularity versions than can be accessed using modules.
+At the CRG HPC system there are several Singularity versions than can be accessed using Environment modules.
 To check available Singularity versions, type: module avail Singularity
 Then you can load one using: module load Singularity/x.y.z
 ```
