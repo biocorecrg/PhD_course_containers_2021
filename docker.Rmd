@@ -325,6 +325,10 @@ Run container as daemon (in background) with a given name:
 docker run --detach --name myubuntu_${USER} ubuntu:18.04 tail -f /dev/null
 ```
 
+```{block2, type='rmdnote'}
+Since we are sharing the same machine and this would lead to clashes among different users of the course, we are going to append the environment variable ${USER} when we name images and containers.
+```
+
 ### docker ps: check containers status
 
 List running containers:
